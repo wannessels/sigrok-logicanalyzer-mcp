@@ -1,0 +1,24 @@
+[project]
+name = "sigrok-mcp"
+version = "0.1.0"
+description = "MCP server for sigrok logic analyzers (ZeroPlus LAP-C 16128 and others)"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+]
+
+[project.scripts]
+sigrok-mcp = "sigrok_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sigrok_mcp"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+]
