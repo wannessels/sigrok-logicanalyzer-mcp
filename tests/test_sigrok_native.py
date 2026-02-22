@@ -1,4 +1,4 @@
-"""Tests for sigrok_native.py — mocked sigrok bindings and sigrok-cli."""
+"""Tests for sigrok_native.py — mocked sigrok bindings and pysigrok decoding."""
 
 from __future__ import annotations
 
@@ -12,7 +12,9 @@ from sigrok_logic_analyzer_mcp.sigrok_native import (
     scan_devices,
     run_capture,
     decode_protocol,
+    decode_protocol_from_data,
     list_decoders,
+    list_decoders_sync,
     export_data,
     export_data_from_array,
     SigrokNotFoundError,
@@ -24,6 +26,7 @@ from sigrok_logic_analyzer_mcp.sigrok_native import (
     _parse_triggers,
     _data_to_bits,
     _data_to_hex,
+    _data_to_packed_ints,
     _find_sigrok_cli,
 )
 
@@ -157,6 +160,18 @@ def test_data_to_hex():
     data = np.array([[0x93], [0x92], [0x91]], dtype=np.uint8)
     result = _data_to_hex(data)
     assert result == ["93", "92", "91"]
+
+
+def test_data_to_packed_ints():
+    # Single byte: 0x05 = 0b00000101
+    data = np.array([[0x05]], dtype=np.uint8)
+    packed = _data_to_packed_ints(data)
+    assert packed[0] == 0x05
+
+    # Two bytes: [0xFF, 0x01] = 0x01FF
+    data = np.array([[0xFF, 0x01]], dtype=np.uint8)
+    packed = _data_to_packed_ints(data)
+    assert packed[0] == 0x01FF
 
 
 # ---------------------------------------------------------------------------
@@ -343,7 +358,145 @@ async def test_run_capture_no_device():
 
 
 # ---------------------------------------------------------------------------
-# Async tests: decode_protocol (via sigrok-cli)
+# Native protocol decoding tests (pysigrok)
+# ---------------------------------------------------------------------------
+
+def _generate_uart_byte(byte_val, samplerate, baudrate, ch_bit=0):
+    """Generate UART signal samples for a single byte."""
+    spb = int(samplerate / baudrate)
+    samples = []
+    samples.extend([0] * spb)  # start bit (low)
+    for bit_num in range(8):
+        bit = (byte_val >> bit_num) & 1
+        samples.extend([bit << ch_bit] * spb)
+    samples.extend([(1 << ch_bit)] * spb)  # stop bit (high)
+    return samples
+
+
+def test_decode_protocol_from_data_uart():
+    """Test native UART decoding with pysigrok."""
+    samplerate = 100000
+    baudrate = 9600
+
+    # Build signal: idle + 'H' (0x48) + idle + 'i' (0x69) + idle
+    idle = [0x01] * 100
+    signal = (
+        idle
+        + _generate_uart_byte(0x48, samplerate, baudrate)
+        + [0x01] * 50
+        + _generate_uart_byte(0x69, samplerate, baudrate)
+        + [0x01] * 100
+    )
+
+    # Convert to the [num_samples, unit_size] format used by capture store
+    data = np.array(signal, dtype=np.uint8).reshape(-1, 1)
+
+    result = decode_protocol_from_data(
+        data=data,
+        num_channels=1,
+        sample_rate=samplerate,
+        decoder_id="uart",
+        decoder_options={"baudrate": "9600"},
+        channel_mapping={"rx": "0"},
+    )
+
+    # Should decode 'H' (0x48) and 'i' (0x69)
+    assert "48" in result
+    assert "69" in result
+    assert "rx-data" in result
+
+
+def test_decode_protocol_from_data_with_filter():
+    """Test native decoding with annotation filter."""
+    samplerate = 100000
+    baudrate = 9600
+
+    idle = [0x01] * 100
+    signal = idle + _generate_uart_byte(0x48, samplerate, baudrate) + [0x01] * 100
+    data = np.array(signal, dtype=np.uint8).reshape(-1, 1)
+
+    result = decode_protocol_from_data(
+        data=data,
+        num_channels=1,
+        sample_rate=samplerate,
+        decoder_id="uart",
+        decoder_options={"baudrate": "9600"},
+        channel_mapping={"rx": "0"},
+        annotation_filter="rx-data",
+    )
+
+    # With filter, should only have rx-data annotations
+    assert "rx-data" in result
+    # Should NOT have start/stop bit annotations
+    assert "rx-start" not in result
+
+
+def test_decode_protocol_from_data_unknown_decoder():
+    """Test that unknown decoder raises DecoderError."""
+    data = np.array([[0x01]], dtype=np.uint8)
+    with pytest.raises(DecoderError, match="Unknown decoder"):
+        decode_protocol_from_data(
+            data=data,
+            num_channels=1,
+            sample_rate=1000000,
+            decoder_id="nonexistent_decoder_xyz",
+        )
+
+
+@pytest.mark.asyncio
+async def test_decode_protocol_native_path():
+    """Test that decode_protocol uses native path when data is provided."""
+    samplerate = 100000
+    baudrate = 9600
+
+    idle = [0x01] * 100
+    signal = idle + _generate_uart_byte(0x48, samplerate, baudrate) + [0x01] * 100
+    data = np.array(signal, dtype=np.uint8).reshape(-1, 1)
+
+    result = await decode_protocol(
+        decoder="uart",
+        decoder_options={"baudrate": "9600"},
+        channel_mapping={"rx": "0"},
+        data=data,
+        num_channels=1,
+        sample_rate=samplerate,
+    )
+
+    assert "48" in result
+
+
+# ---------------------------------------------------------------------------
+# Native list_decoders tests (pysigrok entry points)
+# ---------------------------------------------------------------------------
+
+def test_list_decoders_sync():
+    """Test listing decoders via pysigrok entry points."""
+    decoders = list_decoders_sync()
+    assert len(decoders) > 0
+
+    # Known decoders should be present
+    decoder_ids = {d["id"] for d in decoders}
+    assert "uart" in decoder_ids
+    assert "i2c" in decoder_ids
+    assert "spi" in decoder_ids
+
+    # Each decoder should have an id and description
+    for d in decoders:
+        assert "id" in d
+        assert "description" in d
+
+
+@pytest.mark.asyncio
+async def test_list_decoders_async():
+    """Test async wrapper for listing decoders."""
+    decoders = await list_decoders()
+    assert len(decoders) > 0
+    decoder_ids = {d["id"] for d in decoders}
+    assert "uart" in decoder_ids
+
+
+# ---------------------------------------------------------------------------
+# Fallback tests: decode via sigrok-cli (when no in-memory data)
 # ---------------------------------------------------------------------------
 
 @pytest.fixture
@@ -353,8 +506,9 @@ def mock_sigrok_cli(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_decode_i2c(mock_sigrok_cli):
-    output = "i2c-1: Write address: 50\ni2c-1: Data write: 00\ni2c-1: Data read: FF\n"
+async def test_decode_cli_fallback(mock_sigrok_cli):
+    """Test sigrok-cli fallback when no in-memory data is provided."""
+    output = "i2c-1: Write address: 50\ni2c-1: Data write: 00\n"
 
     with patch("asyncio.create_subprocess_exec", return_value=_mock_process(stdout=output)) as mock_exec:
         result = await decode_protocol(
@@ -375,59 +529,11 @@ async def test_decode_i2c(mock_sigrok_cli):
 
 
 @pytest.mark.asyncio
-async def test_decode_uart_with_options(mock_sigrok_cli):
-    output = "uart-1: TX data: 48\nuart-1: TX data: 65\n"
-
-    with patch("asyncio.create_subprocess_exec", return_value=_mock_process(stdout=output)) as mock_exec:
-        result = await decode_protocol(
-            input_file="/tmp/test.sr",
-            decoder="uart",
-            decoder_options={"baudrate": "115200", "parity": "none"},
-            channel_mapping={"rx": "0"},
-        )
-
-    call_args = mock_exec.call_args[0]
-    p_idx = list(call_args).index("-P")
-    decoder_spec = call_args[p_idx + 1]
-    assert "uart" in decoder_spec
-    assert "baudrate=115200" in decoder_spec
-
-
-@pytest.mark.asyncio
-async def test_decode_failure(mock_sigrok_cli):
+async def test_decode_cli_failure(mock_sigrok_cli):
     proc = _mock_process(stderr="Unknown decoder 'foobar'", returncode=1)
     with patch("asyncio.create_subprocess_exec", return_value=proc):
         with pytest.raises(DecoderError):
             await decode_protocol(input_file="/tmp/test.sr", decoder="foobar")
-
-
-# ---------------------------------------------------------------------------
-# Async tests: list_decoders (via sigrok-cli)
-# ---------------------------------------------------------------------------
-
-@pytest.mark.asyncio
-async def test_list_decoders(mock_sigrok_cli):
-    output = (
-        "Supported hardware drivers:\n"
-        "  fx2lafw        fx2lafw\n"
-        "\n"
-        "Supported protocol decoders:\n"
-        "  i2c            Inter-Integrated Circuit\n"
-        "  spi            Serial Peripheral Interface\n"
-        "  uart           Universal Asynchronous Receiver/Transmitter\n"
-        "\n"
-        "Supported input formats:\n"
-        "  csv            CSV\n"
-    )
-
-    with patch("asyncio.create_subprocess_exec", return_value=_mock_process(stdout=output)):
-        decoders = await list_decoders()
-
-    assert len(decoders) == 3
-    assert decoders[0]["id"] == "i2c"
-    assert decoders[1]["id"] == "spi"
-    assert decoders[2]["id"] == "uart"
-    assert "Inter-Integrated" in decoders[0]["description"]
 
 
 # ---------------------------------------------------------------------------

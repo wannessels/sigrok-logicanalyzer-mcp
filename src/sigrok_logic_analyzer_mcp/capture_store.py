@@ -29,6 +29,7 @@ class CaptureInfo:
     description: str = ""
     data: np.ndarray | None = field(default=None, repr=False)
     num_channels: int = 0
+    sample_rate: int = 0
 
 
 class CaptureStore:
@@ -77,11 +78,13 @@ class CaptureStore:
         capture_id: str,
         data: np.ndarray,
         num_channels: int,
+        sample_rate: int = 0,
     ) -> None:
         """Attach in-memory capture data to an existing capture."""
         info = self.get(capture_id)
         info.data = data
         info.num_channels = num_channels
+        info.sample_rate = sample_rate
 
     def get(self, capture_id: str) -> CaptureInfo:
         """Get capture info by ID. Raises CaptureNotFoundError if not found."""

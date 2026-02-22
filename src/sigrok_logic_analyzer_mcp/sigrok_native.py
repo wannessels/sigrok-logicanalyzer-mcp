@@ -1,8 +1,8 @@
-"""Native Python interface to sigrok via libsigrok bindings.
+"""Native Python interface to sigrok via libsigrok and pysigrok bindings.
 
 Uses the sigrok.core SWIG bindings for device scanning, configuration, and
-capture. Falls back to sigrok-cli subprocess for protocol decoding (since
-libsigrokdecode has no Python bindings).
+capture. Uses pysigrok (sigrokdecode) for protocol decoding natively in
+Python — no sigrok-cli subprocess needed.
 """
 
 from __future__ import annotations
@@ -10,7 +10,7 @@ from __future__ import annotations
 import asyncio
 import functools
 import shutil
-import signal
+from importlib.metadata import entry_points
 from typing import Any
 
 import numpy as np
@@ -25,7 +25,7 @@ class SigrokError(Exception):
 
 
 class SigrokNotFoundError(SigrokError):
-    """sigrok Python bindings or sigrok-cli not available."""
+    """sigrok Python bindings not available."""
 
 
 class DeviceNotFoundError(SigrokError):
@@ -145,6 +145,18 @@ def _data_to_bits(data: np.ndarray, num_channels: int) -> list[str]:
 def _data_to_hex(data: np.ndarray) -> list[str]:
     """Convert captured numpy data to hex strings."""
     return ["".join(f"{int(b):02x}" for b in row) for row in data]
+
+
+def _data_to_packed_ints(data: np.ndarray) -> np.ndarray:
+    """Convert [num_samples, unit_size] uint8 data to packed integer samples.
+
+    Each sample becomes a single integer where bit N = channel N.
+    This is the format expected by pysigrok decoders.
+    """
+    result = np.zeros(len(data), dtype=np.uint32)
+    for byte_idx in range(data.shape[1]):
+        result |= data[:, byte_idx].astype(np.uint32) << (byte_idx * 8)
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -379,7 +391,299 @@ def export_data_from_array(
 
 
 # ---------------------------------------------------------------------------
-# Public API — Protocol decoding (falls back to sigrok-cli)
+# Public API — Protocol decoding (native via pysigrok)
+# ---------------------------------------------------------------------------
+
+def _get_srd():
+    """Import sigrokdecode, raising DecoderError on failure."""
+    try:
+        import sigrokdecode as srd
+        return srd
+    except ImportError as e:
+        raise DecoderError(
+            "pysigrok not found. Install with: pip install pysigrok pysigrok-libsigrokdecode"
+        ) from e
+
+
+class _NumpyInput:
+    """Feed logic data from a numpy array of packed integer samples into pysigrok."""
+
+    def __init__(
+        self,
+        data: np.ndarray,
+        samplerate: int,
+        num_channels: int,
+    ) -> None:
+        from sigrokdecode.input import Input
+        # We manually implement the Input interface instead of subclassing,
+        # because we need the callbacks dict from Input.__init__
+        self.callbacks: dict = {}
+        self.data = data
+        self.samplerate = samplerate
+        self.logic_channels = [f"D{i}" for i in range(num_channels)]
+        self.analog_channels: list[str] = []
+        self.samplenum = -1
+        self.matched: list[bool] | None = None
+        self.last_sample: int | None = None
+        self.start_samplenum: int | None = None
+        self.unitsize = max(1, (num_channels + 7) // 8)
+
+    def add_callback(self, output_type, output_filter, fun):
+        if output_type not in self.callbacks:
+            self.callbacks[output_type] = set()
+        self.callbacks[output_type].add((output_filter, fun))
+
+    def put(self, startsample, endsample, output_id, data):
+        if output_id not in self.callbacks:
+            return
+        for output_filter, cb in self.callbacks[output_id]:
+            cb(startsample, endsample, data)
+
+    def wait(self, conds=None):
+        srd = _get_srd()
+        if conds is None:
+            conds = []
+        self.matched = [False]
+        while not any(self.matched):
+            self.matched = [True] * (len(conds) if conds else 1)
+            self.samplenum += 1
+
+            if self.samplenum >= len(self.data):
+                if self.start_samplenum is not None:
+                    self.put(
+                        self.start_samplenum, self.samplenum,
+                        srd.OUTPUT_PYTHON, ["logic", self.last_sample],
+                    )
+                raise EOFError()
+
+            sample = int(self.data[self.samplenum])
+
+            if self.last_sample is None:
+                self.last_sample = sample
+                self.start_samplenum = self.samplenum
+
+            if self.last_sample != sample:
+                self.put(
+                    self.start_samplenum, self.samplenum,
+                    srd.OUTPUT_PYTHON, ["logic", self.last_sample],
+                )
+                self.start_samplenum = self.samplenum
+
+            for i, cond in enumerate(conds):
+                if "skip" in cond:
+                    cond["skip"] -= 1
+                    self.matched[i] = cond["skip"] == 0
+                    continue
+                self.matched[i] = srd.cond_matches(
+                    cond, self.last_sample, sample,
+                )
+            self.last_sample = sample
+
+        bits = []
+        for b in range(self.unitsize * 8):
+            bits.append((sample >> b) & 0x1)
+        return tuple(bits)
+
+
+class _AnnotationCollector:
+    """Collects decoded annotations from pysigrok decoders."""
+
+    def __init__(self) -> None:
+        self.annotations: list[dict] = []
+
+    def reset(self):
+        self.annotations.clear()
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def metadata(self, key, value):
+        pass
+
+    def output(self, source, startsample, endsample, data):
+        srd = _get_srd()
+        # Only collect from actual Decoder instances, not from the Input
+        if not isinstance(source, srd.Decoder):
+            return
+        decoder_cls = type(source)
+        ann_index = data[0]
+        ann_texts = data[1]
+        ann_type = decoder_cls.annotations[ann_index]
+        self.annotations.append({
+            "start_sample": startsample,
+            "end_sample": endsample,
+            "ann_id": ann_type[0],
+            "ann_desc": ann_type[1],
+            "texts": ann_texts,
+        })
+
+
+def _coerce_option_value(opt_def: dict, value: str) -> Any:
+    """Coerce a string option value to the type expected by the decoder."""
+    default = opt_def.get("default")
+    if isinstance(default, int):
+        return int(value)
+    if isinstance(default, float):
+        return float(value)
+    return value
+
+
+def decode_protocol_from_data(
+    data: np.ndarray,
+    num_channels: int,
+    sample_rate: int,
+    decoder_id: str,
+    decoder_options: dict[str, str] | None = None,
+    channel_mapping: dict[str, str] | None = None,
+    annotation_filter: str | None = None,
+) -> str:
+    """Run a protocol decoder on in-memory captured data using pysigrok.
+
+    Args:
+        data: numpy uint8 array of shape [num_samples, unit_size].
+        num_channels: number of logic channels.
+        sample_rate: sample rate in Hz.
+        decoder_id: decoder name (e.g. 'uart', 'i2c', 'spi').
+        decoder_options: decoder options (e.g. {'baudrate': '115200'}).
+        channel_mapping: map decoder pins to channel indices
+            (e.g. {'rx': '0'} or {'sda': '0', 'scl': '1'}).
+        annotation_filter: only show this annotation type (e.g. 'rx-data').
+
+    Returns:
+        Decoded protocol output as text lines.
+    """
+    srd = _get_srd()
+
+    try:
+        decoder_cls = srd.get_decoder(decoder_id)
+    except (RuntimeError, Exception) as e:
+        raise DecoderError(f"Unknown decoder '{decoder_id}': {e}") from e
+
+    # Build options dict starting from defaults
+    options = {}
+    for opt in getattr(decoder_cls, "options", ()):
+        options[opt["id"]] = opt["default"]
+
+    # Apply user overrides
+    if decoder_options:
+        for key, val in decoder_options.items():
+            # Find the option definition to coerce type
+            opt_def = None
+            for o in getattr(decoder_cls, "options", ()):
+                if o["id"] == key:
+                    opt_def = o
+                    break
+            if opt_def is not None:
+                options[key] = _coerce_option_value(opt_def, val)
+            else:
+                options[key] = val
+
+    # Build pin mapping
+    pin_map: dict[str, int] = {}
+    if channel_mapping:
+        for pin_id, ch_str in channel_mapping.items():
+            pin_map[pin_id] = int(ch_str)
+
+    # Convert data to packed integers
+    packed = _data_to_packed_ints(data)
+
+    # Create input source and output collector
+    input_source = _NumpyInput(packed, sample_rate, num_channels)
+    collector = _AnnotationCollector()
+
+    decoder_config = [{
+        "id": decoder_id,
+        "cls": decoder_cls,
+        "options": options,
+        "pin_mapping": pin_map,
+    }]
+
+    ann_filter = annotation_filter
+    # pysigrok uses output_filter as the annotation ID string
+    try:
+        srd.run_decoders(
+            input_source, collector, decoder_config,
+            output_type=srd.OUTPUT_ANN,
+            output_filter=ann_filter,
+        )
+    except EOFError:
+        pass
+    except Exception as e:
+        raise DecoderError(str(e)) from e
+
+    # Format annotations as text lines
+    lines = []
+    for ann in collector.annotations:
+        text = ann["texts"][0] if ann["texts"] else ""
+        lines.append(f"{decoder_id}: {ann['ann_id']}: {text}")
+
+    return "\n".join(lines)
+
+
+async def decode_protocol(
+    input_file: str | None = None,
+    decoder: str = "",
+    decoder_options: dict[str, str] | None = None,
+    channel_mapping: dict[str, str] | None = None,
+    annotation_filter: str | None = None,
+    *,
+    data: np.ndarray | None = None,
+    num_channels: int = 0,
+    sample_rate: int = 0,
+) -> str:
+    """Run a protocol decoder.
+
+    If data/num_channels/sample_rate are provided, decodes natively using pysigrok.
+    Otherwise, falls back to sigrok-cli on the input_file.
+    """
+    if data is not None and num_channels > 0 and sample_rate > 0:
+        return await asyncio.get_event_loop().run_in_executor(
+            None,
+            lambda: decode_protocol_from_data(
+                data, num_channels, sample_rate, decoder,
+                decoder_options, channel_mapping, annotation_filter,
+            ),
+        )
+
+    # Fallback to sigrok-cli for .sr files without in-memory data
+    if input_file is None:
+        raise DecoderError("No input data or file provided for decoding.")
+
+    return await _decode_protocol_cli(
+        input_file, decoder, decoder_options, channel_mapping, annotation_filter,
+    )
+
+
+# ---------------------------------------------------------------------------
+# Public API — List decoders (native via pysigrok)
+# ---------------------------------------------------------------------------
+
+def list_decoders_sync() -> list[dict]:
+    """List all available protocol decoders using pysigrok entry points."""
+    eps = entry_points(group="pysigrok.decoders")
+    decoders = []
+    for ep in sorted(eps, key=lambda x: x.name):
+        try:
+            cls = ep.load()
+            decoders.append({
+                "id": getattr(cls, "id", ep.name),
+                "description": getattr(cls, "longname", getattr(cls, "desc", "")),
+            })
+        except Exception:
+            decoders.append({"id": ep.name, "description": "(failed to load)"})
+    return decoders
+
+
+async def list_decoders() -> list[dict]:
+    """List all available protocol decoders."""
+    return await asyncio.get_event_loop().run_in_executor(None, list_decoders_sync)
+
+
+# ---------------------------------------------------------------------------
+# sigrok-cli fallback (for .sr file decoding without in-memory data)
 # ---------------------------------------------------------------------------
 
 _SIGROK_CLI = "sigrok-cli"
@@ -390,8 +694,7 @@ def _find_sigrok_cli() -> str:
     path = shutil.which(_SIGROK_CLI)
     if path is None:
         raise SigrokNotFoundError(
-            "sigrok-cli not found on PATH. Protocol decoding requires sigrok-cli. "
-            "Install it with your package manager "
+            "sigrok-cli not found on PATH. Install it with your package manager "
             "(e.g. 'apt install sigrok-cli' or 'brew install sigrok')."
         )
     return path
@@ -428,17 +731,14 @@ async def _run_cli(args: list[str], timeout: float = 30.0) -> str:
     return stdout
 
 
-async def decode_protocol(
+async def _decode_protocol_cli(
     input_file: str,
     decoder: str,
     decoder_options: dict[str, str] | None = None,
     channel_mapping: dict[str, str] | None = None,
     annotation_filter: str | None = None,
 ) -> str:
-    """Run a protocol decoder on a captured .sr file.
-
-    Uses sigrok-cli since libsigrokdecode has no Python bindings.
-    """
+    """Fallback: run protocol decoder via sigrok-cli subprocess."""
     decoder_spec = decoder
     opts: list[str] = []
     if channel_mapping:
@@ -449,42 +749,11 @@ async def decode_protocol(
         decoder_spec += ":" + ":".join(opts)
 
     args = ["-i", input_file, "-P", decoder_spec]
-
     if annotation_filter:
         args += ["-A", annotation_filter]
 
     return await _run_cli(args, timeout=30.0)
 
-
-async def list_decoders() -> list[dict]:
-    """List all available protocol decoders.
-
-    Uses sigrok-cli since libsigrokdecode has no Python bindings.
-    """
-    output = await _run_cli(["--list-supported"])
-
-    decoders = []
-    in_decoders = False
-
-    for line in output.splitlines():
-        if "protocol decoders" in line.lower():
-            in_decoders = True
-            continue
-        if in_decoders and line.startswith("Supported "):
-            break
-        if in_decoders and line.strip():
-            parts = line.strip().split(None, 1)
-            if len(parts) == 2:
-                decoders.append({"id": parts[0], "description": parts[1]})
-            elif len(parts) == 1:
-                decoders.append({"id": parts[0], "description": ""})
-
-    return decoders
-
-
-# ---------------------------------------------------------------------------
-# Public API — Export from file (fallback via sigrok-cli)
-# ---------------------------------------------------------------------------
 
 async def export_data(
     input_file: str,

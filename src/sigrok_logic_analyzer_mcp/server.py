@@ -4,7 +4,7 @@ Exposes logic analyzer functionality (capture, decode, analyze) as MCP tools
 for use with Claude Code or other MCP clients. Uses stdio transport.
 
 Uses the native sigrok Python bindings for device scanning and capture,
-and falls back to sigrok-cli for protocol decoding.
+and pysigrok for native protocol decoding.
 
 Usage:
     python -m sigrok_logic_analyzer_mcp.server
@@ -142,8 +142,9 @@ async def capture(
     except sigrok_native.SigrokError as e:
         return f"Capture failed: {e}"
 
-    # Store in-memory data for fast native export
-    store.store_data(capture_id, data, num_ch)
+    # Store in-memory data for fast native export and decoding
+    rate_hz = sigrok_native._parse_sample_rate(sample_rate)
+    store.store_data(capture_id, data, num_ch, sample_rate=rate_hz)
 
     size = os.path.getsize(file_path) if os.path.exists(file_path) else 0
 
@@ -226,13 +227,24 @@ async def decode_protocol(
                 k, v = pair.split("=", 1)
                 opts[k.strip()] = v.strip()
 
+    # Parse annotation_filter: sigrok-cli uses "decoder=annotation" format,
+    # pysigrok uses just the annotation ID string
+    ann_filter = None
+    if annotation_filter and "=" in annotation_filter:
+        ann_filter = annotation_filter.split("=", 1)[1]
+    elif annotation_filter:
+        ann_filter = annotation_filter
+
     try:
         raw = await sigrok_native.decode_protocol(
             input_file=info.file_path,
             decoder=protocol,
             decoder_options=opts,
             channel_mapping=ch_map,
-            annotation_filter=annotation_filter,
+            annotation_filter=ann_filter,
+            data=info.data,
+            num_channels=info.num_channels,
+            sample_rate=info.sample_rate,
         )
     except sigrok_native.DecoderError as e:
         return f"Decoder error: {e}"
