@@ -3,6 +3,9 @@
 Exposes logic analyzer functionality (capture, decode, analyze) as MCP tools
 for use with Claude Code or other MCP clients. Uses stdio transport.
 
+Uses the native sigrok Python bindings for device scanning and capture,
+and falls back to sigrok-cli for protocol decoding.
+
 Usage:
     python -m sigrok_logic_analyzer_mcp.server
     # or via the entry point:
@@ -18,7 +21,7 @@ from dataclasses import dataclass
 from mcp.server.fastmcp import FastMCP, Context
 
 from sigrok_logic_analyzer_mcp.capture_store import CaptureStore, CaptureNotFoundError
-from sigrok_logic_analyzer_mcp import sigrok_cli
+from sigrok_logic_analyzer_mcp import sigrok_native
 from sigrok_logic_analyzer_mcp.formatters import (
     format_decoded_protocol,
     format_raw_samples,
@@ -81,10 +84,10 @@ async def scan_devices(
                 "saleae-logic-pro", "dreamsourcelab-dslogic".
     """
     try:
-        devices = await sigrok_cli.scan_devices(driver=driver)
-    except sigrok_cli.DeviceNotFoundError as e:
+        devices = await sigrok_native.scan_devices(driver=driver)
+    except sigrok_native.DeviceNotFoundError as e:
         return str(e)
-    except sigrok_cli.SigrokNotFoundError as e:
+    except sigrok_native.SigrokNotFoundError as e:
         return str(e)
 
     lines = [f"Found {len(devices)} device(s):"]
@@ -126,7 +129,7 @@ async def capture(
     capture_id, file_path = store.new_capture(description=description)
 
     try:
-        await sigrok_cli.run_capture(
+        data, num_ch = await sigrok_native.run_capture(
             output_file=file_path,
             driver=driver,
             channels=channels,
@@ -136,8 +139,11 @@ async def capture(
             triggers=triggers,
             wait_trigger=wait_trigger,
         )
-    except sigrok_cli.SigrokError as e:
+    except sigrok_native.SigrokError as e:
         return f"Capture failed: {e}"
+
+    # Store in-memory data for fast native export
+    store.store_data(capture_id, data, num_ch)
 
     size = os.path.getsize(file_path) if os.path.exists(file_path) else 0
 
@@ -145,11 +151,12 @@ async def capture(
         f"Capture saved as {capture_id}",
         f"  File: {file_path} ({size} bytes)",
         f"  Sample rate: {sample_rate}",
+        f"  Captured: {len(data)} samples, {num_ch} channels",
     ]
     if channels:
         parts.append(f"  Channels: {channels}")
     if num_samples:
-        parts.append(f"  Samples: {num_samples}")
+        parts.append(f"  Requested samples: {num_samples}")
     elif duration_ms:
         parts.append(f"  Duration: {duration_ms} ms")
     if triggers:
@@ -220,14 +227,14 @@ async def decode_protocol(
                 opts[k.strip()] = v.strip()
 
     try:
-        raw = await sigrok_cli.decode_protocol(
+        raw = await sigrok_native.decode_protocol(
             input_file=info.file_path,
             decoder=protocol,
             decoder_options=opts,
             channel_mapping=ch_map,
             annotation_filter=annotation_filter,
         )
-    except sigrok_cli.DecoderError as e:
+    except sigrok_native.DecoderError as e:
         return f"Decoder error: {e}"
 
     return format_decoded_protocol(raw, max_lines=max_results)
@@ -245,8 +252,8 @@ async def list_protocol_decoders(
         filter: Optional search string to filter decoder list (case-insensitive).
     """
     try:
-        decoders = await sigrok_cli.list_decoders()
-    except sigrok_cli.SigrokError as e:
+        decoders = await sigrok_native.list_decoders()
+    except sigrok_native.SigrokError as e:
         return f"Error listing decoders: {e}"
 
     if filter:
@@ -294,14 +301,23 @@ async def get_raw_samples(
 
     num_samples = min(num_samples, 5000)
 
-    try:
-        raw = await sigrok_cli.export_data(
-            input_file=info.file_path,
-            output_format=output_format,
-            channels=channels,
+    # Use in-memory data if available (native capture), otherwise fall back
+    if info.data is not None:
+        channel_filter = None
+        if channels:
+            channel_filter = sigrok_native._parse_channel_spec(channels)
+        raw = sigrok_native.export_data_from_array(
+            info.data, info.num_channels, output_format, channel_filter,
         )
-    except sigrok_cli.SigrokError as e:
-        return f"Error reading samples: {e}"
+    else:
+        try:
+            raw = await sigrok_native.export_data(
+                input_file=info.file_path,
+                output_format=output_format,
+                channels=channels,
+            )
+        except sigrok_native.SigrokError as e:
+            return f"Error reading samples: {e}"
 
     return format_raw_samples(raw, start_sample=start_sample, window_size=num_samples)
 
@@ -328,14 +344,23 @@ async def analyze_capture(
     except CaptureNotFoundError as e:
         return str(e)
 
-    try:
-        raw = await sigrok_cli.export_data(
-            input_file=info.file_path,
-            output_format="bits",
-            channels=channels,
+    # Use in-memory data if available
+    if info.data is not None:
+        channel_filter = None
+        if channels:
+            channel_filter = sigrok_native._parse_channel_spec(channels)
+        raw = sigrok_native.export_data_from_array(
+            info.data, info.num_channels, "bits", channel_filter,
         )
-    except sigrok_cli.SigrokError as e:
-        return f"Error analyzing capture: {e}"
+    else:
+        try:
+            raw = await sigrok_native.export_data(
+                input_file=info.file_path,
+                output_format="bits",
+                channels=channels,
+            )
+        except sigrok_native.SigrokError as e:
+            return f"Error analyzing capture: {e}"
 
     return summarize_capture_data(raw)
 
@@ -344,7 +369,7 @@ async def analyze_capture(
 async def list_captures(ctx: Context) -> str:
     """List all captures from this session.
 
-    Shows capture IDs, file sizes, and descriptions.
+    Shows capture IDs, sample counts, and descriptions.
     """
     store = _get_store(ctx)
     captures = store.list_captures()
@@ -354,9 +379,12 @@ async def list_captures(ctx: Context) -> str:
 
     lines = [f"Captures ({len(captures)}):"]
     for cap in captures:
-        desc = f" — {cap['description']}" if cap.get("description") else ""
+        desc = f" -- {cap['description']}" if cap.get("description") else ""
+        samples = cap.get("num_samples", 0)
+        ch = cap.get("num_channels", 0)
         lines.append(
-            f"  {cap['id']}  {cap['size_bytes']:>8} bytes{desc}"
+            f"  {cap['id']}  {cap['size_bytes']:>8} bytes  "
+            f"{samples} samples x {ch} ch{desc}"
         )
     return "\n".join(lines)
 

@@ -3,6 +3,7 @@
 import os
 import tempfile
 
+import numpy as np
 import pytest
 
 from sigrok_logic_analyzer_mcp.capture_store import CaptureStore, CaptureNotFoundError
@@ -95,3 +96,32 @@ def test_custom_base_dir():
         # cleanup should not remove a user-provided directory
         store.cleanup()
         assert os.path.exists(custom_dir)
+
+
+def test_store_data():
+    store = CaptureStore()
+    try:
+        cap_id, _ = store.new_capture(description="with data")
+        data = np.array([[0x05], [0x0A]], dtype=np.uint8)
+        store.store_data(cap_id, data, num_channels=4)
+
+        info = store.get(cap_id)
+        assert info.data is not None
+        assert info.num_channels == 4
+        assert len(info.data) == 2
+    finally:
+        store.cleanup()
+
+
+def test_list_captures_with_data():
+    store = CaptureStore()
+    try:
+        cap_id, _ = store.new_capture(description="data capture")
+        data = np.array([[0x05], [0x0A], [0x0F]], dtype=np.uint8)
+        store.store_data(cap_id, data, num_channels=8)
+
+        caps = store.list_captures()
+        assert caps[0]["num_channels"] == 8
+        assert caps[0]["num_samples"] == 3
+    finally:
+        store.cleanup()

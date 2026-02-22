@@ -1,4 +1,8 @@
-"""Manages captured .sr files so they can be referenced across MCP tool calls."""
+"""Manages captured data so it can be referenced across MCP tool calls.
+
+Stores both in-memory numpy arrays (for fast native export) and .sr file
+paths (for protocol decoding via sigrok-cli).
+"""
 
 from __future__ import annotations
 
@@ -7,6 +11,10 @@ import shutil
 import tempfile
 import time
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import numpy as np
 
 
 class CaptureNotFoundError(Exception):
@@ -19,10 +27,12 @@ class CaptureInfo:
     file_path: str
     created_at: float
     description: str = ""
+    data: np.ndarray | None = field(default=None, repr=False)
+    num_channels: int = 0
 
 
 class CaptureStore:
-    """Manages captured .sr files in a temp directory.
+    """Manages captured data in a temp directory with in-memory copies.
 
     Each capture gets a short human-readable ID (cap_001, cap_002, ...) that
     can be referenced from subsequent tool calls (decode, export, etc.).
@@ -48,7 +58,7 @@ class CaptureStore:
         """Create a new capture slot.
 
         Returns (capture_id, file_path) where file_path is the .sr file
-        path to pass to sigrok-cli --output-file.
+        path for saving the capture.
         """
         self._counter += 1
         capture_id = f"cap_{self._counter:03d}"
@@ -61,6 +71,17 @@ class CaptureStore:
             description=description,
         )
         return capture_id, file_path
+
+    def store_data(
+        self,
+        capture_id: str,
+        data: np.ndarray,
+        num_channels: int,
+    ) -> None:
+        """Attach in-memory capture data to an existing capture."""
+        info = self.get(capture_id)
+        info.data = data
+        info.num_channels = num_channels
 
     def get(self, capture_id: str) -> CaptureInfo:
         """Get capture info by ID. Raises CaptureNotFoundError if not found."""
@@ -84,6 +105,8 @@ class CaptureStore:
                 "size_bytes": size,
                 "created_at": info.created_at,
                 "description": info.description,
+                "num_channels": info.num_channels,
+                "num_samples": len(info.data) if info.data is not None else 0,
             })
         return result
 
