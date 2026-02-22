@@ -1,6 +1,6 @@
 """Tests for formatters.py."""
 
-from sigrok_mcp.formatters import (
+from sigrok_logic_analyzer_mcp.formatters import (
     format_decoded_protocol,
     format_raw_samples,
     summarize_capture_data,

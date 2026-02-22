@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, patch, MagicMock
 
 import pytest
 
-from sigrok_mcp.sigrok_cli import (
+from sigrok_logic_analyzer_mcp.sigrok_cli import (
     scan_devices,
     run_capture,
     decode_protocol,

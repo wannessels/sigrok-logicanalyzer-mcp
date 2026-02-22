@@ -4,9 +4,9 @@ Exposes logic analyzer functionality (capture, decode, analyze) as MCP tools
 for use with Claude Code or other MCP clients. Uses stdio transport.
 
 Usage:
-    python -m sigrok_mcp.server
+    python -m sigrok_logic_analyzer_mcp.server
     # or via the entry point:
-    sigrok-mcp
+    sigrok-logic-analyzer-mcp
 """
 
 from __future__ import annotations
@@ -17,9 +17,9 @@ from dataclasses import dataclass
 
 from mcp.server.fastmcp import FastMCP, Context
 
-from sigrok_mcp.capture_store import CaptureStore, CaptureNotFoundError
-from sigrok_mcp import sigrok_cli
-from sigrok_mcp.formatters import (
+from sigrok_logic_analyzer_mcp.capture_store import CaptureStore, CaptureNotFoundError
+from sigrok_logic_analyzer_mcp import sigrok_cli
+from sigrok_logic_analyzer_mcp.formatters import (
     format_decoded_protocol,
     format_raw_samples,
     summarize_capture_data,

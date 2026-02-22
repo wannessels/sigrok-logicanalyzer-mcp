@@ -30,7 +30,7 @@ class CaptureStore:
 
     def __init__(self, base_dir: str | None = None) -> None:
         if base_dir is None:
-            self._base_dir = tempfile.mkdtemp(prefix="sigrok_mcp_")
+            self._base_dir = tempfile.mkdtemp(prefix="sigrok_logic_analyzer_mcp_")
             self._owns_dir = True
         else:
             os.makedirs(base_dir, exist_ok=True)
