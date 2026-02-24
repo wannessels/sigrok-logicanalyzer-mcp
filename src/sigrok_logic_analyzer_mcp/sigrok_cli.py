@@ -148,11 +148,11 @@ async def run_capture(
     Args:
         output_file: Path to save the .sr capture file.
         driver: sigrok driver name.
-        channels: Channel spec, e.g. "0-3" or "0,1,4,5".
+        channels: Channel spec using device names, e.g. "A0-A7" or "A0,A1,B0,B1".
         sample_rate: Sample rate, e.g. "1m" for 1 MHz, "200k" for 200 kHz.
         num_samples: Number of samples to capture (mutually exclusive with duration_ms).
         duration_ms: Capture duration in milliseconds.
-        triggers: Trigger spec, e.g. "0=r,1=0" (channel 0 rising, channel 1 low).
+        triggers: Trigger spec, e.g. "A0=r,A1=0" (channel A0 rising, A1 low).
         wait_trigger: If True, suppress pre-trigger data.
 
     Returns:

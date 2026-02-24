@@ -114,9 +114,11 @@ async def capture(
         sample_rate: Sample rate — e.g. "1m" (1 MHz), "200k", "10m", "100m".
         num_samples: Number of samples to capture. Use this OR duration_ms.
         duration_ms: Capture duration in milliseconds. Use this OR num_samples.
-        channels: Channel selection — e.g. "0-3" or "0,1,4,5". Default: all.
-        triggers: Trigger conditions — e.g. "0=r" (ch0 rising edge),
-                  "0=r,1=0" (ch0 rising AND ch1 low). Trigger types:
+        channels: Channel selection — e.g. "A0-A7" or "A0,A1,B0,B1". Channel
+                  names depend on the device (ZeroPlus uses A0-A7, B0-B7;
+                  fx2lafw uses D0-D7). Default: all.
+        triggers: Trigger conditions — e.g. "A0=r" (ch A0 rising edge),
+                  "A0=r,A1=0" (ch A0 rising AND A1 low). Trigger types:
                   0=low, 1=high, r=rising, f=falling.
         wait_trigger: If true, only output data after the trigger fires.
         driver: sigrok driver name.
@@ -185,8 +187,9 @@ async def decode_protocol(
         protocol: Decoder name — common ones: "i2c", "spi", "uart", "1wire",
                   "jtag", "can", "lin", "usb_signalling", "sdcard_spi".
         channel_mapping: Map protocol signals to LA channels — e.g.
-                         "sda=0,scl=1" for I2C, "mosi=0,miso=1,sck=2,cs=3"
-                         for SPI, "rx=0" for UART.
+                         "sda=A0,scl=A1" for I2C, "mosi=A0,miso=A1,sck=A2,cs=A3"
+                         for SPI, "rx=A0" for UART. Use the device's channel
+                         names (run scan_devices to see available channels).
         options: Decoder options — e.g. "baudrate=115200" for UART,
                  "cpol=0,cpha=0,bitorder=msb-first" for SPI.
         annotation_filter: Show only specific annotations — e.g. "uart=tx-data"
@@ -284,7 +287,7 @@ async def get_raw_samples(
         start_sample: Offset into the capture (0-indexed).
         num_samples: Number of samples to return (max 5000).
         output_format: "bits" (binary), "hex", or "csv".
-        channels: Optional channel filter (e.g. "0-3").
+        channels: Optional channel filter (e.g. "A0-A3").
     """
     store = _get_store(ctx)
     try:
@@ -320,7 +323,7 @@ async def analyze_capture(
 
     Args:
         capture_id: ID from a previous capture (e.g. "cap_001").
-        channels: Optional channel filter (e.g. "0-3").
+        channels: Optional channel filter (e.g. "A0-A3").
     """
     store = _get_store(ctx)
     try:
