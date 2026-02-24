@@ -64,57 +64,85 @@ def summarize_capture_data(raw_output: str) -> str:
     """Generate a high-level summary of captured sample data.
 
     Analyzes the bits-format output to report:
-    - Total samples
+    - Total samples per channel
     - Per-channel activity (edge counts, percentage high)
+
+    sigrok bits output looks like:
+        libsigrok 0.5.2
+        Acquisition with 2/16 channels at 1 MHz
+        A0:11111111 00001111 ...
+        A1:00000000 11110000 ...
+        A0:11111111 00001111 ...
+        ...
+    Each line has a channel label prefix and groups of 8 bits separated by spaces.
     """
     lines = raw_output.strip().splitlines()
     if not lines:
         return "No sample data to summarize."
 
-    total_samples = len(lines)
-
-    # For bits format, each line is something like "10010011" or "1001 0011"
-    # Determine channel count from first line
-    first_line = lines[0].replace(" ", "")
-    num_channels = len(first_line)
-
-    if num_channels == 0:
-        return f"Total samples: {total_samples} (unable to parse channel data)"
-
-    # Per-channel stats
-    high_counts = [0] * num_channels
-    edge_counts = [0] * num_channels
-    prev_bits: list[str | None] = [None] * num_channels
+    # Parse sigrok bits format: collect bit strings per channel name
+    channel_bits: dict[str, list[str]] = {}
+    channel_order: list[str] = []
 
     for line in lines:
-        bits = line.replace(" ", "")
-        if len(bits) != num_channels:
+        # Match lines like "A0:11111111 00001111 ..."
+        if ":" not in line:
             continue
-        for ch in range(num_channels):
-            b = bits[ch]
-            if b == "1":
-                high_counts[ch] += 1
-            if prev_bits[ch] is not None and b != prev_bits[ch]:
-                edge_counts[ch] += 1
-            prev_bits[ch] = b
+        label, _, data = line.partition(":")
+        label = label.strip()
+        data = data.strip()
+        # Skip non-data lines (e.g. header lines with colons)
+        if not data or not all(c in "01 " for c in data):
+            continue
+        bits = data.replace(" ", "")
+        if not bits:
+            continue
+        if label not in channel_bits:
+            channel_bits[label] = []
+            channel_order.append(label)
+        channel_bits[label].append(bits)
 
-    summary_lines = [
-        f"Capture summary: {total_samples} samples, {num_channels} channels",
-        "",
-        f"{'Channel':<10} {'High %':>8} {'Edges':>8} {'Activity':>10}",
-        "-" * 40,
-    ]
+    if not channel_bits:
+        return "No sample data to summarize (could not parse channel data)."
 
-    for ch in range(num_channels):
-        pct_high = (high_counts[ch] / total_samples * 100) if total_samples > 0 else 0
-        activity = "active" if edge_counts[ch] > 0 else "static"
-        if edge_counts[ch] == 0:
-            if high_counts[ch] == total_samples:
-                activity = "always high"
-            elif high_counts[ch] == 0:
-                activity = "always low"
+    summary_lines = []
+
+    # Compute per-channel stats
+    header_parts = []
+    for ch_name in channel_order:
+        all_bits = "".join(channel_bits[ch_name])
+        total = len(all_bits)
+        high_count = all_bits.count("1")
+        # Count edges (transitions)
+        edge_count = 0
+        for i in range(1, total):
+            if all_bits[i] != all_bits[i - 1]:
+                edge_count += 1
+        header_parts.append((ch_name, total, high_count, edge_count))
+
+    total_samples = header_parts[0][1] if header_parts else 0
+
+    summary_lines.append(
+        f"Capture summary: {total_samples} samples, {len(channel_order)} channels"
+    )
+    summary_lines.append("")
+    summary_lines.append(
+        f"{'Channel':<10} {'High %':>8} {'Edges':>8}   {'Activity'}"
+    )
+    summary_lines.append("-" * 45)
+
+    for ch_name, total, high_count, edge_count in header_parts:
+        pct_high = (high_count / total * 100) if total > 0 else 0
+        if edge_count > 0:
+            activity = "active"
+        elif high_count == total:
+            activity = "always high"
+        elif high_count == 0:
+            activity = "always low"
+        else:
+            activity = "static"
         summary_lines.append(
-            f"CH{ch:<8} {pct_high:>7.1f}% {edge_counts[ch]:>8} {activity:>10}"
+            f"{ch_name:<10} {pct_high:>7.1f}% {edge_count:>8}   {activity}"
         )
 
     return "\n".join(summary_lines)

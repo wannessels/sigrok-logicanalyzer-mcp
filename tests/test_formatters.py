@@ -74,27 +74,35 @@ def test_summarize_empty():
 
 
 def test_summarize_all_high():
-    raw = "\n".join(["11"] * 100)
+    # sigrok bits format: "CH:11111111 11111111 ..."
+    raw = (
+        "libsigrok 0.5.2\n"
+        "Acquisition with 2/16 channels at 1 MHz\n"
+        + "\n".join([f"A0:11111111", f"A1:11111111"] * 10)
+    )
     result = summarize_capture_data(raw)
-    assert "100 samples" in result
+    assert "80 samples" in result  # 10 lines * 8 bits each
     assert "2 channels" in result
     assert "always high" in result
 
 
 def test_summarize_mixed():
-    # 4-channel data: ch0 toggles, ch1 always high, ch2 always low, ch3 toggles
-    samples = []
-    for i in range(100):
-        ch0 = "1" if i % 2 == 0 else "0"
-        ch1 = "1"
-        ch2 = "0"
-        ch3 = "1" if i % 10 == 0 else "0"
-        samples.append(f"{ch0}{ch1}{ch2}{ch3}")
-    raw = "\n".join(samples)
+    # Build sigrok-style bits output with known patterns
+    # A0: alternating 10101010, A1: all high, A2: all low, A3: mostly low with edges
+    lines = [
+        "libsigrok 0.5.2",
+        "Acquisition with 4/16 channels at 1 MHz",
+    ]
+    for _ in range(10):
+        lines.append("A0:10101010")
+        lines.append("A1:11111111")
+        lines.append("A2:00000000")
+        lines.append("A3:10000000")
+    raw = "\n".join(lines)
 
     result = summarize_capture_data(raw)
-    assert "100 samples" in result
+    assert "80 samples" in result  # 10 lines * 8 bits
     assert "4 channels" in result
-    assert "always high" in result  # ch1
-    assert "always low" in result   # ch2
-    assert "active" in result        # ch0 and ch3
+    assert "always high" in result   # A1
+    assert "always low" in result    # A2
+    assert "active" in result         # A0 and A3
