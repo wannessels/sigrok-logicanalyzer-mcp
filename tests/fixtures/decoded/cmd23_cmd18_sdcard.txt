@@ -1,0 +1,286 @@
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: Start bit
+sdcard_sd-1: Transmission: host
+sdcard_sd-1: Command: SET_BLOCK_COUNT (23)
+sdcard_sd-1: Argument: 0x00000100
+sdcard_sd-1: CRC: 0x39
+sdcard_sd-1: End bit
+sdcard_sd-1: CMD23 (SET_BLOCK_COUNT): CMD23
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: Start bit
+sdcard_sd-1: Transmission: card
+sdcard_sd-1: Command: SET_BLOCK_COUNT (23)
+sdcard_sd-1: Argument: 0x00000900
+sdcard_sd-1: CRC: 0x1d
+sdcard_sd-1: End bit
+sdcard_sd-1: Reply: R1
+sdcard_sd-1: Card status
+sdcard_sd-1: OUT_OF_RANGE
+sdcard_sd-1: ADDRESS_ERROR
+sdcard_sd-1: BLOCK_LEN_ERROR
+sdcard_sd-1: ERASE_SEQ_ERROR
+sdcard_sd-1: ERASE_PARAM
+sdcard_sd-1: WP_VIOLATION
+sdcard_sd-1: CARD_IS_LOCKED
+sdcard_sd-1: LOCK_UNLOCK_FAILED
+sdcard_sd-1: COM_CRC_ERROR
+sdcard_sd-1: ILLEGAL_COMMAND
+sdcard_sd-1: CARD_ECC_FAILED
+sdcard_sd-1: CC_ERROR
+sdcard_sd-1: ERROR
+sdcard_sd-1: Reserved
+sdcard_sd-1: Reserved for DEFERRED_RESPONSE
+sdcard_sd-1: CSD_OVERWRITE
+sdcard_sd-1: WP_ERASE_SKIP
+sdcard_sd-1: CARD_ECC_DISABLED
+sdcard_sd-1: ERASE_RESET
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: READY_FOR_DATA
+sdcard_sd-1: Unknown
+sdcard_sd-1: Unknown
+sdcard_sd-1: APP_CMD
+sdcard_sd-1: Reserved for SDIO card
+sdcard_sd-1: AKE_SEQ_ERROR
+sdcard_sd-1: Reserved for application specific commands
+sdcard_sd-1: Reserved for manufacturer test mode
+sdcard_sd-1: Reserved for manufacturer test mode
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: Start bit
+sdcard_sd-1: Transmission: host
+sdcard_sd-1: Command: READ_MULTIPLE_BLOCK (18)
+sdcard_sd-1: Argument: 0x00073240
+sdcard_sd-1: CRC: 0x15
+sdcard_sd-1: End bit
+sdcard_sd-1: CMD18 (READ_MULTIPLE_BLOCK): CMD18
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 0
+sdcard_sd-1: 0
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: 1
+sdcard_sd-1: Start bit
+sdcard_sd-1: Transmission: card
+sdcard_sd-1: Command: READ_MULTIPLE_BLOCK (18)
+sdcard_sd-1: Argument: 0x00000901
+sdcard_sd-1: CRC: 0x53
+sdcard_sd-1: End bit
+sdcard_sd-1: Reply: R1
+sdcard_sd-1: Card status
+sdcard_sd-1: OUT_OF_RANGE
+sdcard_sd-1: ADDRESS_ERROR
+sdcard_sd-1: BLOCK_LEN_ERROR
+sdcard_sd-1: ERASE_SEQ_ERROR
+sdcard_sd-1: ERASE_PARAM
+sdcard_sd-1: WP_VIOLATION
+sdcard_sd-1: CARD_IS_LOCKED
+sdcard_sd-1: LOCK_UNLOCK_FAILED
+sdcard_sd-1: COM_CRC_ERROR
+sdcard_sd-1: ILLEGAL_COMMAND
+sdcard_sd-1: CARD_ECC_FAILED
+sdcard_sd-1: CC_ERROR
+sdcard_sd-1: ERROR
+sdcard_sd-1: Reserved
+sdcard_sd-1: Reserved for DEFERRED_RESPONSE
+sdcard_sd-1: CSD_OVERWRITE
+sdcard_sd-1: WP_ERASE_SKIP
+sdcard_sd-1: CARD_ECC_DISABLED
+sdcard_sd-1: ERASE_RESET
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: CURRENT_STATE
+sdcard_sd-1: READY_FOR_DATA
+sdcard_sd-1: Unknown
+sdcard_sd-1: Unknown
+sdcard_sd-1: APP_CMD
+sdcard_sd-1: Reserved for SDIO card
+sdcard_sd-1: AKE_SEQ_ERROR
+sdcard_sd-1: Reserved for application specific commands
+sdcard_sd-1: Reserved for manufacturer test mode
+sdcard_sd-1: Reserved for manufacturer test mode

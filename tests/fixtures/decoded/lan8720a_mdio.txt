@@ -1,0 +1,216 @@
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: PRE #32
+mdio-1: 0
+mdio-1: 1
+mdio-1: ST (Clause 22)
+mdio-1: 1
+mdio-1: 0
+mdio-1: OP: READ
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 1
+mdio-1: PHYAD: 01
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: REGAD: 00
+mdio-1: 1
+mdio-1: 0
+mdio-1: TA
+mdio-1: 0
+mdio-1: 0
+mdio-1: 1
+mdio-1: 1
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: DATA: 3000
+mdio-1: READ:  3000 PHYAD: 01 REGAD: 00
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: PRE #32
+mdio-1: 0
+mdio-1: 1
+mdio-1: ST (Clause 22)
+mdio-1: 0
+mdio-1: 1
+mdio-1: OP: WRITE
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 1
+mdio-1: PHYAD: 01
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: REGAD: 00
+mdio-1: 1
+mdio-1: 0
+mdio-1: TA
+mdio-1: 1
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: DATA: 8000
+mdio-1: WRITE: 8000 PHYAD: 01 REGAD: 00
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: 1
+mdio-1: PRE #32
+mdio-1: 0
+mdio-1: 1
+mdio-1: ST (Clause 22)
+mdio-1: 1
+mdio-1: 0
+mdio-1: OP: READ
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 1
+mdio-1: PHYAD: 01
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: REGAD: 00
+mdio-1: 1
+mdio-1: 0
+mdio-1: TA
+mdio-1: 1
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: 0
+mdio-1: DATA: 8000
+mdio-1: READ:  8000 PHYAD: 01 REGAD: 00

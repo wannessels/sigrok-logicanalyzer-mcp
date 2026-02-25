@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(sigrok-cli:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(echo === $decoder ===:*)",
+      "Bash(head:*)",
+      "WebFetch(domain:www.gnu.org)",
+      "Bash(curl:*)"
     ]
   }
 }

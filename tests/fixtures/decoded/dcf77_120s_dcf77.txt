@@ -1,0 +1,133 @@
+dcf77-1: Unknown bit 0: 0
+dcf77-1: Unknown bit 1: 0
+dcf77-1: Unknown bit 2: 0
+dcf77-1: Unknown bit 3: 1
+dcf77-1: Unknown bit 4: 1
+dcf77-1: Unknown bit 5: 1
+dcf77-1: Invalid bit timing
+dcf77-1: Unknown bit 6: 0
+dcf77-1: Unknown bit 7: 0
+dcf77-1: Unknown bit 8: 1
+dcf77-1: Unknown bit 9: 0
+dcf77-1: Unknown bit 10: 0
+dcf77-1: Unknown bit 11: 1
+dcf77-1: Unknown bit 12: 0
+dcf77-1: Invalid bit timing
+dcf77-1: Unknown bit 13: 0
+dcf77-1: Unknown bit 14: 1
+dcf77-1: Unknown bit 15: 0
+dcf77-1: Unknown bit 16: 0
+dcf77-1: Unknown bit 17: 0
+dcf77-1: Unknown bit 18: 0
+dcf77-1: Unknown bit 19: 0
+dcf77-1: Unknown bit 20: 1
+dcf77-1: Unknown bit 21: 0
+dcf77-1: Invalid bit timing
+dcf77-1: Unknown bit 22: 0
+dcf77-1: Unknown bit 23: 1
+dcf77-1: Unknown bit 24: 0
+dcf77-1: Unknown bit 25: 0
+dcf77-1: Unknown bit 26: 0
+dcf77-1: Unknown bit 27: 0
+dcf77-1: Bit 0: 0
+dcf77-1: Start of minute (always 0)
+dcf77-1: Bit 1: 0
+dcf77-1: Bit 2: 1
+dcf77-1: Bit 3: 1
+dcf77-1: Bit 4: 1
+dcf77-1: Bit 5: 1
+dcf77-1: Bit 6: 1
+dcf77-1: Bit 7: 1
+dcf77-1: Bit 8: 0
+dcf77-1: Bit 9: 1
+dcf77-1: Bit 10: 1
+dcf77-1: Bit 11: 0
+dcf77-1: Bit 12: 0
+dcf77-1: Bit 13: 0
+dcf77-1: Invalid bit timing
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 14: 0
+dcf77-1: Special bits: 00001101111110
+dcf77-1: Bit 15: 0
+dcf77-1: Call bit: not set
+dcf77-1: Bit 16: 0
+dcf77-1: Summer time announcement: not active
+dcf77-1: Bit 17: 0
+dcf77-1: CEST: not in effect
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 18: 1
+dcf77-1: CET: in effect
+dcf77-1: Bit 19: 0
+dcf77-1: Leap second announcement: not active
+dcf77-1: Bit 20: 1
+dcf77-1: Start of encoded time (always 1)
+dcf77-1: Bit 21: 1
+dcf77-1: Bit 22: 0
+dcf77-1: Bit 23: 0
+dcf77-1: Bit 24: 1
+dcf77-1: Bit 25: 0
+dcf77-1: Bit 26: 0
+dcf77-1: Bit 27: 1
+dcf77-1: Minutes: 49
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 28: 1
+dcf77-1: Minute parity: OK
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 29: 1
+dcf77-1: Bit 30: 1
+dcf77-1: Bit 31: 0
+dcf77-1: Bit 32: 0
+dcf77-1: Bit 33: 0
+dcf77-1: Bit 34: 1
+dcf77-1: Hours: 23
+dcf77-1: Bit 35: 1
+dcf77-1: Hour parity: OK
+dcf77-1: Bit 36: 1
+dcf77-1: Bit 37: 0
+dcf77-1: Bit 38: 0
+dcf77-1: Bit 39: 1
+dcf77-1: Bit 40: 0
+dcf77-1: Bit 41: 0
+dcf77-1: Day: 9
+dcf77-1: Bit 42: 1
+dcf77-1: Bit 43: 0
+dcf77-1: Bit 44: 0
+dcf77-1: Day of week: 1 (Monday)
+dcf77-1: Bit 45: 1
+dcf77-1: Bit 46: 0
+dcf77-1: Bit 47: 0
+dcf77-1: Bit 48: 0
+dcf77-1: Bit 49: 0
+dcf77-1: Month: 1 (January)
+dcf77-1: Bit 50: 0
+dcf77-1: Bit 51: 0
+dcf77-1: Bit 52: 1
+dcf77-1: Bit 53: 0
+dcf77-1: Bit 54: 0
+dcf77-1: Bit 55: 1
+dcf77-1: Bit 56: 0
+dcf77-1: Invalid bit timing
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 57: 0
+dcf77-1: Year: 24
+dcf77-1: Bit 58: 0
+dcf77-1: Date parity: OK
+dcf77-1: Bit 59: 0
+dcf77-1: Invalid DCF77 bit: 59
+dcf77-1: Bit 0: 0
+dcf77-1: Start of minute (always 0)
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 1: 0
+dcf77-1: Bit 2: 0
+dcf77-1: Bit 3: 1
+dcf77-1: Bit 4: 1
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 5: 0
+dcf77-1: Bit 6: 0
+dcf77-1: Bit 7: 1
+dcf77-1: Bit 8: 1
+dcf77-1: Bit 9: 1
+dcf77-1: Bit 10: 0
+dcf77-1: Invalid bit timing
+dcf77-1: Invalid bit timing
+dcf77-1: Bit 11: 1

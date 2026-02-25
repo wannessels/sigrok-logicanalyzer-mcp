@@ -1,0 +1,4296 @@
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data byte 0: 0xf0
+can-1: Data byte 1: 0x00
+can-1: Data byte 2: 0x00
+can-1: Data byte 3: 0x1f
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x00
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0fff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 2040 (0x7f8)
+can-1: Identifier bits 10..4 must not be all recessive
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 255 (0xff)
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 31 (0x1f)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 2032 (0x7f0)
+can-1: Full Identifier: 8128496 (0x7c07f0)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0007
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: Identifier: 1 (0x1)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 229376 (0x38000)
+can-1: Full Identifier: 491520 (0x78000)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 63 (0x3f)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 260096 (0x3f800)
+can-1: Full Identifier: 16775168 (0xfff800)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xc0
+can-1: Data byte 4: 0x00
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x7f
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 1
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x7f
+can-1: Data byte 6: 0xff
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x00fe
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 15 (0xf)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Extended Identifier: 262143 (0x3ffff)
+can-1: Full Identifier: 4194303 (0x3fffff)
+can-1: Substitute remote request: 1
+can-1: 1
+can-1: Remote transmission request: remote frame
+can-1: 1
+can-1: Flexible data format: 1
+can-1: Reserved bit 1: 1
+can-1: 1
+can-1: Reserved bit 0: 1
+can-1: 1
+can-1: Bit rate switch: 1
+can-1: 1
+can-1: Error state indicator: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 15
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xff
+can-1: Data byte 2: 0xff
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xff
+can-1: Data byte 5: 0xff
+can-1: Data byte 6: 0xff
+can-1: Data byte 7: 0xff
+can-1: Data byte 8: 0xff
+can-1: Data byte 9: 0xff
+can-1: Data byte 10: 0xff
+can-1: Data byte 11: 0xff
+can-1: Data byte 12: 0xff
+can-1: Data byte 13: 0xff
+can-1: Data byte 14: 0xff
+can-1: Data byte 15: 0xff
+can-1: Data byte 16: 0xff
+can-1: Data byte 17: 0xff
+can-1: Data byte 18: 0xff
+can-1: Data byte 19: 0xff
+can-1: Data byte 20: 0xff
+can-1: Data byte 21: 0xff
+can-1: Data byte 22: 0xff
+can-1: Data byte 23: 0xff
+can-1: Data byte 24: 0xff
+can-1: Data byte 25: 0xff
+can-1: Data byte 26: 0xff
+can-1: Data byte 27: 0xff
+can-1: Data byte 28: 0xff
+can-1: Data byte 29: 0xff
+can-1: Data byte 30: 0xff
+can-1: Data byte 31: 0xff
+can-1: Data byte 32: 0xff
+can-1: Data byte 33: 0xff
+can-1: Data byte 34: 0xff
+can-1: Data byte 35: 0xff
+can-1: Data byte 36: 0xff
+can-1: Data byte 37: 0xff
+can-1: Data byte 38: 0xff
+can-1: Data byte 39: 0xff
+can-1: Data byte 40: 0xff
+can-1: Data byte 41: 0xff
+can-1: Data byte 42: 0xff
+can-1: Data byte 43: 0xff
+can-1: Data byte 44: 0xff
+can-1: Data byte 45: 0xff
+can-1: Data byte 46: 0xff
+can-1: Data byte 47: 0xff
+can-1: Data byte 48: 0xff
+can-1: Data byte 49: 0xff
+can-1: Data byte 50: 0xff
+can-1: Data byte 51: 0xff
+can-1: Data byte 52: 0xff
+can-1: Data byte 53: 0xff
+can-1: Data byte 54: 0xff
+can-1: Data byte 55: 0xff
+can-1: Data byte 56: 0xff
+can-1: Data byte 57: 0xff
+can-1: Data byte 58: 0xff
+can-1: Data byte 59: 0xff
+can-1: Data byte 60: 0xff
+can-1: Data byte 61: 0xff
+can-1: Data byte 62: 0xff
+can-1: Data byte 63: 0xff
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-21 sequence: 0xffffffff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data byte 0: 0xf0
+can-1: Data byte 1: 0x00
+can-1: Data byte 2: 0x00
+can-1: Data byte 3: 0x1f
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x00
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0fff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 2040 (0x7f8)
+can-1: Identifier bits 10..4 must not be all recessive
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 255 (0xff)
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 15 (0xf)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 2032 (0x7f0)
+can-1: Full Identifier: 3934192 (0x3c07f0)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0007
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 3 (0x3)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 229376 (0x38000)
+can-1: Full Identifier: 1015808 (0xf8000)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 63 (0x3f)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 260096 (0x3f800)
+can-1: Full Identifier: 16775168 (0xfff800)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xc0
+can-1: Data byte 4: 0x00
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x7f
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 1
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x7f
+can-1: Data byte 6: 0xff
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x00fe
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 15 (0xf)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Extended Identifier: 262143 (0x3ffff)
+can-1: Full Identifier: 4194303 (0x3fffff)
+can-1: Substitute remote request: 1
+can-1: 1
+can-1: Remote transmission request: remote frame
+can-1: 1
+can-1: Flexible data format: 1
+can-1: Reserved bit 1: 1
+can-1: 1
+can-1: Reserved bit 0: 1
+can-1: 1
+can-1: Bit rate switch: 1
+can-1: 1
+can-1: Error state indicator: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 15
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xff
+can-1: Data byte 2: 0xff
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xff
+can-1: Data byte 5: 0xff
+can-1: Data byte 6: 0xff
+can-1: Data byte 7: 0xff
+can-1: Data byte 8: 0xff
+can-1: Data byte 9: 0xff
+can-1: Data byte 10: 0xff
+can-1: Data byte 11: 0xff
+can-1: Data byte 12: 0xff
+can-1: Data byte 13: 0xff
+can-1: Data byte 14: 0xff
+can-1: Data byte 15: 0xff
+can-1: Data byte 16: 0xff
+can-1: Data byte 17: 0xff
+can-1: Data byte 18: 0xff
+can-1: Data byte 19: 0xff
+can-1: Data byte 20: 0xff
+can-1: Data byte 21: 0xff
+can-1: Data byte 22: 0xff
+can-1: Data byte 23: 0xff
+can-1: Data byte 24: 0xff
+can-1: Data byte 25: 0xff
+can-1: Data byte 26: 0xff
+can-1: Data byte 27: 0xff
+can-1: Data byte 28: 0xff
+can-1: Data byte 29: 0xff
+can-1: Data byte 30: 0xff
+can-1: Data byte 31: 0xff
+can-1: Data byte 32: 0xff
+can-1: Data byte 33: 0xff
+can-1: Data byte 34: 0xff
+can-1: Data byte 35: 0xff
+can-1: Data byte 36: 0xff
+can-1: Data byte 37: 0xff
+can-1: Data byte 38: 0xff
+can-1: Data byte 39: 0xff
+can-1: Data byte 40: 0xff
+can-1: Data byte 41: 0xff
+can-1: Data byte 42: 0xff
+can-1: Data byte 43: 0xff
+can-1: Data byte 44: 0xff
+can-1: Data byte 45: 0xff
+can-1: Data byte 46: 0xff
+can-1: Data byte 47: 0xff
+can-1: Data byte 48: 0xff
+can-1: Data byte 49: 0xff
+can-1: Data byte 50: 0xff
+can-1: Data byte 51: 0xff
+can-1: Data byte 52: 0xff
+can-1: Data byte 53: 0xff
+can-1: Data byte 54: 0xff
+can-1: Data byte 55: 0xff
+can-1: Data byte 56: 0xff
+can-1: Data byte 57: 0xff
+can-1: Data byte 58: 0xff
+can-1: Data byte 59: 0xff
+can-1: Data byte 60: 0xff
+can-1: Data byte 61: 0xff
+can-1: Data byte 62: 0xff
+can-1: Data byte 63: 0xff
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-21 sequence: 0xffffffff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data byte 0: 0xf0
+can-1: Data byte 1: 0x00
+can-1: Data byte 2: 0x00
+can-1: Data byte 3: 0x1f
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x00
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0fff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 2040 (0x7f8)
+can-1: Identifier bits 10..4 must not be all recessive
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 255 (0xff)
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 31 (0x1f)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 2032 (0x7f0)
+can-1: Full Identifier: 8128496 (0x7c07f0)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-15 sequence: 0x0007
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 3 (0x3)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 229376 (0x38000)
+can-1: Full Identifier: 1015808 (0xf8000)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Data length code: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x3f80
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 63 (0x3f)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Extended Identifier: 260096 (0x3f800)
+can-1: Full Identifier: 16775168 (0xfff800)
+can-1: Substitute remote request: 1
+can-1: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: Reserved bit 1: 0
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xc0
+can-1: Data byte 4: 0x00
+can-1: Data byte 5: 0x00
+can-1: Data byte 6: 0x7f
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x0000
+can-1: 1
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: Identifier: 0 (0x0)
+can-1: 0
+can-1: 0
+can-1: Identifier extension bit: standard frame
+can-1: 0
+can-1: Reserved bit 0: 0
+can-1: Remote transmission request: data frame
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 7
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xf0
+can-1: Data byte 2: 0x1f
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xc0
+can-1: Data byte 5: 0x7f
+can-1: Data byte 6: 0xff
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 0
+can-1: 0
+can-1: CRC-15 sequence: 0x00fe
+can-1: 0
+can-1: CRC delimiter: 0
+can-1: CRC delimiter must be a recessive bit
+can-1: 0
+can-1: ACK slot: ACK
+can-1: 0
+can-1: ACK delimiter: 0
+can-1: ACK delimiter must be a recessive bit
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame
+can-1: End of frame (EOF) must be 7 recessive bits
+can-1: 0
+can-1: Start of frame
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 0
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Identifier: 15 (0xf)
+can-1: 1
+can-1: 1
+can-1: Identifier extension bit: extended frame
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Extended Identifier: 262143 (0x3ffff)
+can-1: Full Identifier: 4194303 (0x3fffff)
+can-1: Substitute remote request: 1
+can-1: 1
+can-1: Remote transmission request: remote frame
+can-1: 1
+can-1: Flexible data format: 1
+can-1: Reserved bit 1: 1
+can-1: 1
+can-1: Reserved bit 0: 1
+can-1: 1
+can-1: Bit rate switch: 1
+can-1: 1
+can-1: Error state indicator: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data length code: 15
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: Data byte 0: 0xff
+can-1: Data byte 1: 0xff
+can-1: Data byte 2: 0xff
+can-1: Data byte 3: 0xff
+can-1: Data byte 4: 0xff
+can-1: Data byte 5: 0xff
+can-1: Data byte 6: 0xff
+can-1: Data byte 7: 0xff
+can-1: Data byte 8: 0xff
+can-1: Data byte 9: 0xff
+can-1: Data byte 10: 0xff
+can-1: Data byte 11: 0xff
+can-1: Data byte 12: 0xff
+can-1: Data byte 13: 0xff
+can-1: Data byte 14: 0xff
+can-1: Data byte 15: 0xff
+can-1: Data byte 16: 0xff
+can-1: Data byte 17: 0xff
+can-1: Data byte 18: 0xff
+can-1: Data byte 19: 0xff
+can-1: Data byte 20: 0xff
+can-1: Data byte 21: 0xff
+can-1: Data byte 22: 0xff
+can-1: Data byte 23: 0xff
+can-1: Data byte 24: 0xff
+can-1: Data byte 25: 0xff
+can-1: Data byte 26: 0xff
+can-1: Data byte 27: 0xff
+can-1: Data byte 28: 0xff
+can-1: Data byte 29: 0xff
+can-1: Data byte 30: 0xff
+can-1: Data byte 31: 0xff
+can-1: Data byte 32: 0xff
+can-1: Data byte 33: 0xff
+can-1: Data byte 34: 0xff
+can-1: Data byte 35: 0xff
+can-1: Data byte 36: 0xff
+can-1: Data byte 37: 0xff
+can-1: Data byte 38: 0xff
+can-1: Data byte 39: 0xff
+can-1: Data byte 40: 0xff
+can-1: Data byte 41: 0xff
+can-1: Data byte 42: 0xff
+can-1: Data byte 43: 0xff
+can-1: Data byte 44: 0xff
+can-1: Data byte 45: 0xff
+can-1: Data byte 46: 0xff
+can-1: Data byte 47: 0xff
+can-1: Data byte 48: 0xff
+can-1: Data byte 49: 0xff
+can-1: Data byte 50: 0xff
+can-1: Data byte 51: 0xff
+can-1: Data byte 52: 0xff
+can-1: Data byte 53: 0xff
+can-1: Data byte 54: 0xff
+can-1: Data byte 55: 0xff
+can-1: Data byte 56: 0xff
+can-1: Data byte 57: 0xff
+can-1: Data byte 58: 0xff
+can-1: Data byte 59: 0xff
+can-1: Data byte 60: 0xff
+can-1: Data byte 61: 0xff
+can-1: Data byte 62: 0xff
+can-1: Data byte 63: 0xff
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: CRC-21 sequence: 0xffffffff
+can-1: 1
+can-1: CRC delimiter: 1
+can-1: 1
+can-1: ACK slot: NACK
+can-1: 1
+can-1: ACK delimiter: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: 1
+can-1: End of frame

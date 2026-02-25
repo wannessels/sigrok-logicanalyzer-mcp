@@ -1,0 +1,33 @@
+i2c-1: Start
+i2c-1: Read
+i2c-1: Address read: 50
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Start repeat
+i2c-1: Write
+i2c-1: Address write: 50
+i2c-1: ACK
+i2c-1: Data write: 00
+i2c-1: ACK
+i2c-1: Start repeat
+i2c-1: Read
+i2c-1: Address read: 50
+i2c-1: ACK
+i2c-1: Data read: C0
+i2c-1: ACK
+i2c-1: Data read: B4
+i2c-1: ACK
+i2c-1: Data read: 04
+i2c-1: ACK
+i2c-1: Data read: 22
+i2c-1: ACK
+i2c-1: Data read: 60
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: ACK
+i2c-1: Data read: 00
+i2c-1: NACK
+i2c-1: Stop
