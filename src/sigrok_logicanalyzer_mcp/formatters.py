@@ -378,11 +378,459 @@ def format_uart_transactions(raw_output: str, max_bytes: int = 2000) -> str:
     return "\n".join(lines)
 
 
+def format_can_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Group filtered CAN annotations into compact frame summaries.
+
+    Expects output with annotation filter:
+      can=sof:eof:id:ext-id:full-id:ide:rtr:dlc:data:warnings
+
+    Returns lines like:
+        #001  ID=0x000 [F0 00 00 1F C0 00 00] DLC=7
+        #002  ID=0x000 DLC=0
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No CAN data decoded."
+
+    frames: list[str] = []
+    current_id = ""
+    current_ext_id = ""
+    current_full_id = ""
+    current_dlc = ""
+    current_rtr = ""
+    current_data: list[str] = []
+    in_frame = False
+
+    def _flush():
+        nonlocal current_id, current_ext_id, current_full_id, current_dlc
+        nonlocal current_rtr, current_data, in_frame
+        if not in_frame:
+            return
+        # Use full ID for extended frames, standard ID otherwise
+        if current_full_id:
+            id_str = f"ID=0x{current_full_id}"
+        elif current_id:
+            id_str = f"ID=0x{current_id}"
+        else:
+            id_str = "ID=?"
+        parts = [id_str]
+        if current_data:
+            parts.append(f"[{' '.join(current_data)}]")
+        if current_dlc:
+            parts.append(f"DLC={current_dlc}")
+        if current_rtr == "remote frame":
+            parts.append("RTR")
+        frames.append(" ".join(parts))
+        current_id = current_ext_id = current_full_id = ""
+        current_dlc = current_rtr = ""
+        current_data = []
+        in_frame = False
+
+    for ann in annotations:
+        if ann == "Start of frame":
+            _flush()
+            in_frame = True
+        elif ann == "End of frame":
+            _flush()
+        elif ann.startswith("Identifier:") and "extension" not in ann:
+            # "Identifier: 255 (0xff)"
+            m = re.search(r'\(0x([0-9a-fA-F]+)\)', ann)
+            if m:
+                current_id = m.group(1)
+        elif ann.startswith("Full Identifier:"):
+            m = re.search(r'\(0x([0-9a-fA-F]+)\)', ann)
+            if m:
+                current_full_id = m.group(1)
+        elif ann.startswith("Data length code:"):
+            current_dlc = ann.split(": ", 1)[1].strip()
+        elif ann.startswith("Remote transmission request:"):
+            current_rtr = ann.split(": ", 1)[1].strip()
+        elif ann.startswith("Data byte"):
+            val = ann.split(": ", 1)[1].strip()
+            if val.startswith("0x"):
+                val = val[2:]
+            current_data.append(val.upper())
+
+    _flush()
+
+    total = len(frames)
+    lines = [f"CAN: {total} frames", ""]
+    for i, f in enumerate(frames[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {f}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more frames)")
+    return "\n".join(lines)
+
+
+def format_onewire_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Group filtered 1-Wire network annotations into transaction summaries.
+
+    Expects output with annotation filter: onewire_network
+    Lines like:
+        onewire_network-1: Reset/presence: true
+        onewire_network-1: ROM command: 0x55 'Match ROM'
+        onewire_network-1: ROM: 0x6700000003a6a842
+        onewire_network-1: Data: 0xbe
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No 1-Wire data decoded."
+
+    transactions: list[str] = []
+    roms: Counter[str] = Counter()
+    current_cmd = ""
+    current_rom = ""
+    current_data: list[str] = []
+
+    def _flush():
+        nonlocal current_cmd, current_rom, current_data
+        if current_cmd or current_data:
+            parts = []
+            if current_cmd:
+                parts.append(current_cmd)
+            if current_rom:
+                parts.append(f"ROM={current_rom}")
+            if current_data:
+                parts.append(f"[{' '.join(current_data)}]")
+            transactions.append(" ".join(parts) if parts else "Reset")
+        current_cmd = ""
+        current_rom = ""
+        current_data = []
+
+    for ann in annotations:
+        if ann.startswith("Reset/presence"):
+            _flush()
+        elif ann.startswith("ROM command:"):
+            # "ROM command: 0x55 'Match ROM'"
+            m = re.search(r"'(.+)'", ann)
+            current_cmd = m.group(1) if m else ann.split(": ", 1)[1]
+        elif ann.startswith("ROM:"):
+            current_rom = ann.split(": ", 1)[1].strip()
+            roms[current_rom] += 1
+        elif ann.startswith("Data:"):
+            val = ann.split(": ", 1)[1].strip()
+            if val.startswith("0x"):
+                val = val[2:]
+            current_data.append(val.upper())
+
+    _flush()
+
+    total = len(transactions)
+    rom_summary = ", ".join(roms.keys()) if roms else "none"
+    lines = [f"1-Wire: {total} transactions, ROM {rom_summary}", ""]
+    for i, txn in enumerate(transactions[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {txn}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more transactions)")
+    return "\n".join(lines)
+
+
+def format_mdio_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered MDIO annotations into compact read/write summaries.
+
+    Expects output with annotation filter: mdio=decode
+    Lines like:
+        mdio-1: READ:  3000 PHYAD: 01 REGAD: 00
+        mdio-1: WRITE: 8000 PHYAD: 01 REGAD: 00
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No MDIO data decoded."
+
+    operations: list[str] = []
+    for ann in annotations:
+        if ann.startswith("READ:") or ann.startswith("WRITE:"):
+            parts = ann.split()
+            # parts: ['READ:', '3000', 'PHYAD:', '01', 'REGAD:', '00']
+            op = parts[0].rstrip(":")
+            data = parts[1] if len(parts) > 1 else "?"
+            phy = parts[3] if len(parts) > 3 else "?"
+            reg = parts[5] if len(parts) > 5 else "?"
+            arrow = "->" if op == "READ" else "<-"
+            operations.append(f"{op:<5} PHY={phy} REG={reg} {arrow} 0x{data}")
+
+    total = len(operations)
+    lines = [f"MDIO: {total} operations", ""]
+    for i, op in enumerate(operations[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {op}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more operations)")
+    return "\n".join(lines)
+
+
+def format_usb_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Group filtered USB packet annotations, skipping SOFs.
+
+    Expects output with annotation filter: usb_packet
+    Groups token (IN/OUT/SETUP) + data (DATA0/DATA1) + handshake (ACK/NAK/STALL).
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No USB data decoded."
+
+    transactions: list[str] = []
+    sof_count = 0
+    current_parts: list[str] = []
+
+    def _flush():
+        nonlocal current_parts
+        if current_parts:
+            transactions.append(" ".join(current_parts))
+        current_parts = []
+
+    for ann in annotations:
+        # Skip low-level fields
+        if ann.startswith("SYNC:") or ann.startswith("CRC") or ann.startswith("PID:") or ann.startswith("Frame:"):
+            continue
+        # SOF summary line: "SOF 1128"
+        if ann.startswith("SOF "):
+            sof_count += 1
+            continue
+        # Token packets: "IN ADDR 2 EP 1", "OUT ADDR 0 EP 0", "SETUP ADDR 0 EP 0"
+        if ann.startswith("IN ") or ann.startswith("OUT ") or ann.startswith("SETUP "):
+            _flush()
+            current_parts.append(ann)
+        # Data packets: "DATA0 [ 00 01 00 00 ]"
+        elif ann.startswith("DATA0") or ann.startswith("DATA1"):
+            current_parts.append(ann)
+        # Handshake
+        elif ann in ("ACK", "NAK", "STALL"):
+            current_parts.append(ann)
+            _flush()
+
+    _flush()
+
+    total = len(transactions)
+    lines = [f"USB: {total} transactions ({sof_count} SOFs filtered)", ""]
+    for i, txn in enumerate(transactions[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {txn}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more transactions)")
+    return "\n".join(lines)
+
+
+def format_dcf77_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered DCF77 annotations into a time/date summary.
+
+    Expects output with annotation filter:
+      dcf77=minute:hour:day:day-of-week:month:year
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No DCF77 data decoded."
+
+    minutes = hours = day = dow = month = year = ""
+    for ann in annotations:
+        if ann.startswith("Minutes:"):
+            minutes = ann.split(": ", 1)[1]
+        elif ann.startswith("Hours:"):
+            hours = ann.split(": ", 1)[1]
+        elif ann.startswith("Day:"):
+            day = ann.split(": ", 1)[1]
+        elif ann.startswith("Day of week:"):
+            dow = ann.split(": ", 1)[1]
+        elif ann.startswith("Month:"):
+            month = ann.split(": ", 1)[1]
+        elif ann.startswith("Year:"):
+            year = ann.split(": ", 1)[1]
+
+    lines = ["DCF77: Time decoded", ""]
+    if dow:
+        lines.append(f"Day of week: {dow}")
+    if year and month and day:
+        lines.append(f"Date: 20{year}-{month.split()[0]:>02}-{day:>02}")
+    if hours and minutes:
+        lines.append(f"Time: {hours}:{minutes:>02}")
+    return "\n".join(lines)
+
+
+def format_am230x_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered AM230x (DHT) annotations into sensor readings.
+
+    Expects output with annotation filter: am230x=humidity:temperature:checksum
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No AM230x data decoded."
+
+    readings: list[str] = []
+    humidity = temperature = checksum = ""
+    for ann in annotations:
+        if ann.startswith("Humidity:"):
+            humidity = ann.split(": ", 1)[1]
+        elif ann.startswith("Temperature:"):
+            temperature = ann.split(": ", 1)[1]
+        elif ann.startswith("Checksum:"):
+            checksum = ann.split(": ", 1)[1]
+            parts = []
+            if temperature:
+                parts.append(f"Temp={temperature}")
+            if humidity:
+                parts.append(f"Humidity={humidity}")
+            if checksum:
+                parts.append(f"Checksum={checksum}")
+            readings.append(" ".join(parts))
+            humidity = temperature = checksum = ""
+
+    total = len(readings)
+    lines = [f"AM230x: {total} readings", ""]
+    for i, r in enumerate(readings[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {r}")
+    return "\n".join(lines)
+
+
+def format_avr_isp_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered AVR ISP annotations into operation summaries.
+
+    Expects output with annotation filter: avr_isp
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No AVR ISP data decoded."
+
+    operations: list[str] = []
+    device = ""
+    for ann in annotations:
+        if ann.startswith("Device:"):
+            device = ann.split(": ", 1)[1]
+        operations.append(ann)
+
+    # Deduplicate consecutive identical operations
+    deduped: list[str] = []
+    for op in operations:
+        if not deduped or deduped[-1] != op:
+            deduped.append(op)
+
+    total = len(deduped)
+    header = f"AVR ISP: {total} operations"
+    if device:
+        header += f", device: {device}"
+    lines = [header, ""]
+    for i, op in enumerate(deduped[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {op}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more operations)")
+    return "\n".join(lines)
+
+
+def format_spiflash_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered SPI Flash annotations into command summaries.
+
+    Expects output with annotation filter: spiflash
+    Keeps only the summary "Read data (addr ...)" lines and command lines.
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No SPI Flash data decoded."
+
+    operations: list[str] = []
+    for ann in annotations:
+        # Keep summary read lines and command lines, skip address bits and raw data
+        if ann.startswith("Read data (addr") or ann.startswith("Write data (addr"):
+            # "Read data (addr 0x117c00, 256 bytes): 6f 72 ..."
+            # Truncate the data portion
+            parts = ann.split("): ", 1)
+            operations.append(parts[0] + ")")
+        elif ann.startswith("Command:"):
+            operations.append(ann)
+        elif ann.startswith("Address:"):
+            continue  # skip, included in summary
+        elif ann.startswith("Address bits"):
+            continue
+        elif ann.startswith("Data ("):
+            continue  # skip raw data count
+
+    # Deduplicate: Command lines followed by their summary
+    deduped: list[str] = []
+    for op in operations:
+        if op.startswith("Command:") and deduped and deduped[-1] == op:
+            continue
+        deduped.append(op)
+
+    total = len(deduped)
+    lines = [f"SPI Flash: {total} operations", ""]
+    for i, op in enumerate(deduped[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {op}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more operations)")
+    return "\n".join(lines)
+
+
+def format_sdcard_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered SD Card annotations into command summaries.
+
+    Expects output with annotation filter covering command classes.
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No SD Card data decoded."
+
+    # Keep only meaningful annotations (commands, replies, card status)
+    operations: list[str] = []
+    for ann in annotations:
+        if re.match(r'^[01]$', ann):
+            continue  # skip raw bits
+        operations.append(ann)
+
+    total = len(operations)
+    lines = [f"SD Card: {total} annotations", ""]
+    for i, op in enumerate(operations[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {op}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more annotations)")
+    return "\n".join(lines)
+
+
+def format_z80_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format filtered Z80 annotations into instruction/memory operation summaries.
+
+    Expects output with annotation filter: z80=memrd:memwr:iord:iowr:instr
+    Note: Z80 decode may need debugging for channel mapping.
+    """
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No Z80 data decoded."
+
+    total = len(annotations)
+    lines = [f"Z80: {total} operations", ""]
+    for i, ann in enumerate(annotations[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {ann}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more operations)")
+    return "\n".join(lines)
+
+
+def format_arm_itm_transactions(raw_output: str, max_transactions: int = 500) -> str:
+    """Format ARM ITM annotations. Untested — ARM ITM stacks on UART."""
+    annotations = _parse_annotations(raw_output)
+    if not annotations:
+        return "No ARM ITM data decoded."
+
+    total = len(annotations)
+    lines = [f"ARM ITM: {total} annotations", ""]
+    for i, ann in enumerate(annotations[:max_transactions]):
+        lines.append(f"#{i + 1:03d}  {ann}")
+    if total > max_transactions:
+        lines.append(f"\n... ({total - max_transactions} more annotations)")
+    return "\n".join(lines)
+
+
 # Map protocol names to their transaction formatter
 _TRANSACTION_FORMATTERS = {
     "i2c": format_i2c_transactions,
     "spi": format_spi_transactions,
     "uart": format_uart_transactions,
+    "can": format_can_transactions,
+    "onewire_network": format_onewire_transactions,
+    "mdio": format_mdio_transactions,
+    "usb_packet": format_usb_transactions,
+    "dcf77": format_dcf77_transactions,
+    "am230x": format_am230x_transactions,
+    "avr_isp": format_avr_isp_transactions,
+    "spiflash": format_spiflash_transactions,
+    "sdcard_sd": format_sdcard_transactions,
+    "z80": format_z80_transactions,
+    "arm_itm": format_arm_itm_transactions,  # untested
 }
 
 

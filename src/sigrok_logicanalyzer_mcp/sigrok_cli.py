@@ -45,9 +45,21 @@ _DEFAULT_TIMEOUT = 30  # seconds
 # Annotation filters that strip individual bit annotations for known protocols.
 # Used when detail="summary" to get only high-level decode output from sigrok-cli.
 _SUMMARY_ANNOTATION_FILTERS: dict[str, str] = {
+    # Tested with example .sr files
     "i2c": "i2c=start:repeat-start:stop:ack:nack:address-read:address-write:data-read:data-write",
     "spi": "spi=mosi-data:miso-data:mosi-transfer:miso-transfer",
     "uart": "uart=rx-data:tx-data",
+    "can": "can=sof:eof:id:ext-id:full-id:ide:rtr:dlc:data:warnings",
+    "onewire_network": "onewire_network",
+    "mdio": "mdio=decode",
+    "usb_packet": "usb_packet",
+    "dcf77": "dcf77=minute:hour:day:day-of-week:month:year",
+    "am230x": "am230x=humidity:temperature:checksum",
+    "avr_isp": "avr_isp",
+    "spiflash": "spiflash",
+    "sdcard_sd": "sdcard_sd=cmd0:cmd2:cmd3:cmd6:cmd7:cmd8:cmd9:cmd10:cmd11:cmd12:cmd13:cmd16:cmd17:cmd18:cmd23:cmd24:cmd25:cmd41:cmd55:decoded-fields",
+    "z80": "z80=memrd:memwr:iord:iowr:instr",  # may need channel mapping debugging
+    "arm_itm": "arm_itm",  # untested — stacks on UART
 }
 
 
