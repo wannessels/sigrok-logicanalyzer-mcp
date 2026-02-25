@@ -1,4 +1,4 @@
-# sigrok-logic-analyzer-mcp: Setup & Design
+# sigrok-logicanalyzer-mcp: Setup & Design
 
 ## Overview
 
@@ -95,7 +95,7 @@ Raw logic analyzer output can be enormous (128K samples x 16 channels). The form
 ### Dependencies
 
 ```
-pip install sigrok-logic-analyzer-mcp
+pip install sigrok-logicanalyzer-mcp
 ```
 
 This pulls in:
@@ -122,7 +122,7 @@ Add to your MCP client config (e.g. Claude Code `settings.json`):
 {
   "mcpServers": {
     "sigrok": {
-      "command": "sigrok-logic-analyzer-mcp"
+      "command": "sigrok-logicanalyzer-mcp"
     }
   }
 }

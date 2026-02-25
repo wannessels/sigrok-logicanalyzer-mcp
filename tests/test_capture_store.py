@@ -5,7 +5,7 @@ import tempfile
 
 import pytest
 
-from sigrok_logic_analyzer_mcp.capture_store import CaptureStore, CaptureNotFoundError
+from sigrok_logicanalyzer_mcp.capture_store import CaptureStore, CaptureNotFoundError
 
 
 def test_new_capture_returns_incrementing_ids():

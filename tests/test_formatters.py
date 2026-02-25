@@ -1,6 +1,6 @@
 """Tests for formatters.py."""
 
-from sigrok_logic_analyzer_mcp.formatters import (
+from sigrok_logicanalyzer_mcp.formatters import (
     format_decoded_protocol,
     format_decoded_summary,
     format_i2c_transactions,
