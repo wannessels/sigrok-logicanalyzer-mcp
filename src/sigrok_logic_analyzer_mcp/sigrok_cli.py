@@ -42,6 +42,19 @@ class DecoderError(SigrokError):
 _SIGROK_CLI = "sigrok-cli"
 _DEFAULT_TIMEOUT = 30  # seconds
 
+# Annotation filters that strip individual bit annotations for known protocols.
+# Used when detail="summary" to get only high-level decode output from sigrok-cli.
+_SUMMARY_ANNOTATION_FILTERS: dict[str, str] = {
+    "i2c": "i2c=start:repeat-start:stop:ack:nack:address-read:address-write:data-read:data-write",
+    "spi": "spi=mosi-data:miso-data:mosi-transfer:miso-transfer",
+    "uart": "uart=rx-data:tx-data",
+}
+
+
+def get_summary_annotation_filter(decoder: str) -> str | None:
+    """Return the default annotation filter for summary mode, or None."""
+    return _SUMMARY_ANNOTATION_FILTERS.get(decoder)
+
 
 def _find_sigrok_cli() -> str:
     """Verify sigrok-cli is available and return its path."""
@@ -142,6 +155,7 @@ async def run_capture(
     duration_ms: int | None = None,
     triggers: str | None = None,
     wait_trigger: bool = False,
+    trigger_timeout: float = 30.0,
 ) -> str:
     """Run a capture and save to an .sr file.
 
@@ -154,6 +168,7 @@ async def run_capture(
         duration_ms: Capture duration in milliseconds.
         triggers: Trigger spec, e.g. "A0=r,A1=0" (channel A0 rising, A1 low).
         wait_trigger: If True, suppress pre-trigger data.
+        trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
 
     Returns:
         sigrok-cli stdout (usually empty on success).
@@ -179,10 +194,14 @@ async def run_capture(
 
     args += ["--output-file", output_file]
 
-    # Captures may take longer, especially with triggers
-    timeout = 60.0
-    if duration_ms:
-        timeout = max(timeout, duration_ms / 1000 + 10)
+    # Compute timeout: trigger waits use trigger_timeout, duration-based
+    # captures need at least duration + buffer, otherwise use default.
+    if triggers:
+        timeout = trigger_timeout
+    elif duration_ms:
+        timeout = max(_DEFAULT_TIMEOUT, duration_ms / 1000 + 10)
+    else:
+        timeout = _DEFAULT_TIMEOUT
 
     try:
         return await _run(args, timeout=timeout)

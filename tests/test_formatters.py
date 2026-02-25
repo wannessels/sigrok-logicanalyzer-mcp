@@ -2,6 +2,10 @@
 
 from sigrok_logic_analyzer_mcp.formatters import (
     format_decoded_protocol,
+    format_decoded_summary,
+    format_i2c_transactions,
+    format_spi_transactions,
+    format_uart_transactions,
     format_raw_samples,
     summarize_capture_data,
 )
@@ -106,3 +110,152 @@ def test_summarize_mixed():
     assert "always high" in result   # A1
     assert "always low" in result    # A2
     assert "active" in result         # A0 and A3
+
+
+# ---------------------------------------------------------------------------
+# format_i2c_transactions
+# ---------------------------------------------------------------------------
+
+def test_i2c_transactions_empty():
+    result = format_i2c_transactions("")
+    assert "No I2C data" in result
+
+
+def test_i2c_transactions_write():
+    raw = (
+        "i2c-1: Start\n"
+        "i2c-1: Write\n"
+        "i2c-1: Address write: 50\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: 0B\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: 00\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Stop\n"
+    )
+    result = format_i2c_transactions(raw)
+    assert "1 transactions" in result
+    assert "0x50" in result
+    assert "W 0x50: [0B 00]" in result
+
+
+def test_i2c_transactions_write_then_read():
+    raw = (
+        "i2c-1: Start\n"
+        "i2c-1: Write\n"
+        "i2c-1: Address write: 59\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: 00\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Start repeat\n"
+        "i2c-1: Read\n"
+        "i2c-1: Address read: 59\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data read: FF\n"
+        "i2c-1: NACK\n"
+        "i2c-1: Stop\n"
+    )
+    result = format_i2c_transactions(raw)
+    assert "1 transactions" in result
+    assert "W 0x59: [00] | R 0x59: [FF]" in result
+
+
+def test_i2c_transactions_multiple():
+    raw = (
+        "i2c-1: Start\n"
+        "i2c-1: Write\n"
+        "i2c-1: Address write: 59\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: 0B\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Stop\n"
+        "i2c-1: Start\n"
+        "i2c-1: Write\n"
+        "i2c-1: Address write: 59\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: A7\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Stop\n"
+    )
+    result = format_i2c_transactions(raw)
+    assert "2 transactions" in result
+    assert "#001" in result
+    assert "#002" in result
+
+
+def test_i2c_transactions_truncated():
+    # Build many transactions
+    lines = []
+    for _ in range(10):
+        lines.extend([
+            "i2c-1: Start",
+            "i2c-1: Write",
+            "i2c-1: Address write: 50",
+            "i2c-1: ACK",
+            "i2c-1: Data write: FF",
+            "i2c-1: ACK",
+            "i2c-1: Stop",
+        ])
+    raw = "\n".join(lines)
+    result = format_i2c_transactions(raw, max_transactions=3)
+    assert "10 transactions" in result
+    assert "#003" in result
+    assert "#004" not in result
+    assert "7 more" in result
+
+
+# ---------------------------------------------------------------------------
+# format_uart_transactions
+# ---------------------------------------------------------------------------
+
+def test_uart_transactions_empty():
+    result = format_uart_transactions("")
+    assert "No UART data" in result
+
+
+def test_uart_transactions_tx_rx():
+    raw = (
+        "uart-1: TX data: 48\n"
+        "uart-1: TX data: 69\n"
+        "uart-1: RX data: 06\n"
+    )
+    result = format_uart_transactions(raw)
+    assert "3 bytes" in result
+    assert "2 segments" in result
+    assert "TX>" in result
+    assert "RX<" in result
+    assert "48 69" in result
+    assert '"Hi"' in result
+
+
+# ---------------------------------------------------------------------------
+# format_spi_transactions
+# ---------------------------------------------------------------------------
+
+def test_spi_transactions_empty():
+    result = format_spi_transactions("")
+    assert "No SPI data" in result
+
+
+# ---------------------------------------------------------------------------
+# format_decoded_summary
+# ---------------------------------------------------------------------------
+
+def test_decoded_summary_i2c_uses_formatter():
+    raw = (
+        "i2c-1: Start\n"
+        "i2c-1: Write\n"
+        "i2c-1: Address write: 50\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Data write: FF\n"
+        "i2c-1: ACK\n"
+        "i2c-1: Stop\n"
+    )
+    result = format_decoded_summary(raw, "i2c")
+    assert "W 0x50: [FF]" in result
+
+
+def test_decoded_summary_unknown_falls_back():
+    raw = "custom-1: Something\ncustom-1: Other\n"
+    result = format_decoded_summary(raw, "custom_decoder")
+    assert "2 annotations" in result

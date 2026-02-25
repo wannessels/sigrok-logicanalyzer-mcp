@@ -13,6 +13,7 @@ from sigrok_logic_analyzer_mcp.sigrok_cli import (
     decode_protocol,
     list_decoders,
     export_data,
+    get_summary_annotation_filter,
     SigrokNotFoundError,
     DeviceNotFoundError,
     CaptureError,
@@ -249,3 +250,40 @@ async def test_export_bits(mock_sigrok_cli):
     call_args = mock_exec.call_args[0]
     assert "--output-format" in call_args
     assert "bits" in call_args
+
+
+# ---------------------------------------------------------------------------
+# get_summary_annotation_filter
+# ---------------------------------------------------------------------------
+
+def test_annotation_filter_known_protocols():
+    assert get_summary_annotation_filter("i2c") is not None
+    assert "start" in get_summary_annotation_filter("i2c")
+    assert get_summary_annotation_filter("spi") is not None
+    assert get_summary_annotation_filter("uart") is not None
+
+
+def test_annotation_filter_unknown_protocol():
+    assert get_summary_annotation_filter("jtag") is None
+    assert get_summary_annotation_filter("can") is None
+
+
+# ---------------------------------------------------------------------------
+# run_capture trigger_timeout
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_run_capture_trigger_timeout(mock_sigrok_cli):
+    """Verify trigger_timeout is used when triggers are set."""
+    import asyncio
+    proc = _mock_process()
+    with patch("asyncio.create_subprocess_exec", return_value=proc):
+        with patch("asyncio.wait_for", wraps=asyncio.wait_for) as mock_wait:
+            await run_capture(
+                output_file="/tmp/test.sr",
+                triggers="A0=0",
+                trigger_timeout=15.0,
+            )
+            # wait_for should be called with the trigger_timeout
+            call_kwargs = mock_wait.call_args
+            assert call_kwargs[1].get("timeout", call_kwargs[0][1] if len(call_kwargs[0]) > 1 else None) == 15.0

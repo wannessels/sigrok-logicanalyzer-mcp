@@ -71,6 +71,28 @@ class CaptureStore:
             )
         return self._captures[capture_id]
 
+    def cache_decode(self, capture_id: str, decoder: str, raw_output: str) -> str:
+        """Cache raw decode output alongside the capture. Returns the cache path."""
+        info = self.get(capture_id)
+        cache_path = os.path.join(
+            self._base_dir, f"{capture_id}_{decoder}_raw.txt"
+        )
+        with open(cache_path, "w", encoding="utf-8") as f:
+            f.write(raw_output)
+        return cache_path
+
+    def get_cached_decode(self, capture_id: str, decoder: str) -> str | None:
+        """Return cached raw decode output, or None if not cached."""
+        if capture_id not in self._captures:
+            return None
+        cache_path = os.path.join(
+            self._base_dir, f"{capture_id}_{decoder}_raw.txt"
+        )
+        if os.path.exists(cache_path):
+            with open(cache_path, "r", encoding="utf-8") as f:
+                return f.read()
+        return None
+
     def list_captures(self) -> list[dict]:
         """List all captures with metadata."""
         result = []

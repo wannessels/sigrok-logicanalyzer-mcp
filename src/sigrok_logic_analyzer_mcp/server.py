@@ -21,6 +21,7 @@ from sigrok_logic_analyzer_mcp.capture_store import CaptureStore, CaptureNotFoun
 from sigrok_logic_analyzer_mcp import sigrok_cli
 from sigrok_logic_analyzer_mcp.formatters import (
     format_decoded_protocol,
+    format_decoded_summary,
     format_raw_samples,
     summarize_capture_data,
 )
@@ -52,8 +53,10 @@ mcp = FastMCP(
     "sigrok",
     instructions=(
         "Logic analyzer server for embedded debugging. "
-        "Use scan_devices to find hardware, capture to acquire signals, "
-        "then decode_protocol to analyze I2C/SPI/UART traffic. "
+        "Use capture_and_decode for one-step capture + protocol analysis "
+        "(I2C, SPI, UART, etc.). Use scan_devices to find hardware. "
+        "Use decode_protocol to re-analyze a saved capture with different "
+        "settings or detail='raw' for full annotations. "
         "Captures are referenced by ID (e.g. cap_001) across tool calls."
     ),
     lifespan=app_lifespan,
@@ -102,6 +105,7 @@ async def capture(
     channels: str | None = None,
     triggers: str | None = None,
     wait_trigger: bool = False,
+    trigger_timeout: float = 30.0,
     driver: str = "zeroplus-logic-cube",
     description: str = "",
 ) -> str:
@@ -117,10 +121,10 @@ async def capture(
         channels: Channel selection — e.g. "A0-A7" or "A0,A1,B0,B1". Channel
                   names depend on the device (ZeroPlus uses A0-A7, B0-B7;
                   fx2lafw uses D0-D7). Default: all.
-        triggers: Trigger conditions — e.g. "A0=r" (ch A0 rising edge),
-                  "A0=r,A1=0" (ch A0 rising AND A1 low). Trigger types:
-                  0=low, 1=high, r=rising, f=falling.
+        triggers: Trigger conditions — e.g. "A0=0" (ch A0 low), "A0=1" (ch A0 high).
+                  Supported types depend on device (ZeroPlus: 0=low, 1=high only).
         wait_trigger: If true, only output data after the trigger fires.
+        trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
         driver: sigrok driver name.
         description: Optional label for this capture.
     """
@@ -137,6 +141,7 @@ async def capture(
             duration_ms=duration_ms,
             triggers=triggers,
             wait_trigger=wait_trigger,
+            trigger_timeout=trigger_timeout,
         )
     except sigrok_cli.SigrokError as e:
         return f"Capture failed: {e}"
@@ -167,6 +172,67 @@ async def capture(
     return "\n".join(parts)
 
 
+def _parse_key_value_pairs(text: str) -> dict[str, str]:
+    """Parse 'key=val,key=val' into a dict."""
+    result = {}
+    for pair in text.split(","):
+        pair = pair.strip()
+        if "=" in pair:
+            k, v = pair.split("=", 1)
+            result[k.strip()] = v.strip()
+    return result
+
+
+async def _run_decode(
+    store: CaptureStore,
+    capture_id: str,
+    protocol: str,
+    channel_mapping: str | None,
+    options: str | None,
+    annotation_filter: str | None,
+    detail: str,
+) -> str:
+    """Shared decode logic for decode_protocol and capture_and_decode."""
+    try:
+        info = store.get(capture_id)
+    except CaptureNotFoundError as e:
+        return str(e)
+
+    ch_map = _parse_key_value_pairs(channel_mapping) if channel_mapping else None
+    opts = _parse_key_value_pairs(options) if options else None
+
+    is_summary = detail == "summary"
+
+    # For summary mode, use smart annotation filter unless user overrides
+    effective_filter = annotation_filter
+    if is_summary and not annotation_filter:
+        effective_filter = sigrok_cli.get_summary_annotation_filter(protocol)
+
+    # Check cache for raw mode (summary always re-filters)
+    if not is_summary:
+        cached = store.get_cached_decode(capture_id, protocol)
+        if cached and not annotation_filter and not options:
+            return format_decoded_protocol(cached)
+
+    try:
+        raw = await sigrok_cli.decode_protocol(
+            input_file=info.file_path,
+            decoder=protocol,
+            decoder_options=opts,
+            channel_mapping=ch_map,
+            annotation_filter=effective_filter,
+        )
+    except sigrok_cli.DecoderError as e:
+        return f"Decoder error: {e}"
+
+    # Cache the raw output
+    store.cache_decode(capture_id, protocol, raw)
+
+    if is_summary:
+        return format_decoded_summary(raw, protocol)
+    return format_decoded_protocol(raw)
+
+
 @mcp.tool()
 async def decode_protocol(
     ctx: Context,
@@ -175,7 +241,7 @@ async def decode_protocol(
     channel_mapping: str | None = None,
     options: str | None = None,
     annotation_filter: str | None = None,
-    max_results: int = 200,
+    detail: str = "summary",
 ) -> str:
     """Run a protocol decoder on a captured signal.
 
@@ -193,47 +259,100 @@ async def decode_protocol(
         options: Decoder options — e.g. "baudrate=115200" for UART,
                  "cpol=0,cpha=0,bitorder=msb-first" for SPI.
         annotation_filter: Show only specific annotations — e.g. "uart=tx-data"
-                           or "i2c=data-write".
-        max_results: Maximum decoded frames to return (default 200).
+                           or "i2c=data-write". Overrides the default summary filter.
+        detail: "summary" (default) — compact transaction view, or
+                "raw" — full sigrok-cli annotations.
     """
     store = _get_store(ctx)
+    return await _run_decode(
+        store, capture_id, protocol, channel_mapping, options,
+        annotation_filter, detail,
+    )
+
+
+@mcp.tool()
+async def capture_and_decode(
+    ctx: Context,
+    protocol: str,
+    channel_mapping: str,
+    sample_rate: str = "1m",
+    num_samples: int | None = None,
+    duration_ms: int | None = None,
+    channels: str | None = None,
+    triggers: str | None = None,
+    wait_trigger: bool = False,
+    trigger_timeout: float = 30.0,
+    driver: str = "zeroplus-logic-cube",
+    options: str | None = None,
+    detail: str = "summary",
+    description: str = "",
+) -> str:
+    """Capture signals and decode a protocol in one step.
+
+    This is the fastest way to analyze a bus — captures data from the logic
+    analyzer, runs a protocol decoder, and returns a compact transaction
+    summary. The capture is saved for follow-up analysis.
+
+    Args:
+        protocol: Decoder name — "i2c", "spi", "uart", etc.
+        channel_mapping: Map protocol signals to LA channels — e.g.
+                         "sda=A0,scl=A1" for I2C, "mosi=A0,miso=A1,sck=A2,cs=A3"
+                         for SPI, "rx=A0" for UART.
+        sample_rate: Sample rate — e.g. "1m" (1 MHz), "200k", "10m".
+        num_samples: Number of samples to capture. Use this OR duration_ms.
+        duration_ms: Capture duration in milliseconds. Use this OR num_samples.
+        channels: Channel selection — e.g. "A0,A1". Default: all.
+        triggers: Trigger conditions — e.g. "A0=0" (ch A0 low).
+                  Supported types depend on device (ZeroPlus: 0=low, 1=high).
+        wait_trigger: If true, only output data after the trigger fires.
+        trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
+        driver: sigrok driver name.
+        options: Decoder options — e.g. "baudrate=115200" for UART.
+        detail: "summary" (default) — compact transaction view, or
+                "raw" — full sigrok-cli annotations.
+        description: Optional label for this capture.
+    """
+    store = _get_store(ctx)
+    capture_id, file_path = store.new_capture(description=description)
+
+    # 1. Capture
     try:
-        info = store.get(capture_id)
-    except CaptureNotFoundError as e:
-        return str(e)
-
-    # Parse channel_mapping "sda=0,scl=1" -> {"sda": "0", "scl": "1"}
-    ch_map = None
-    if channel_mapping:
-        ch_map = {}
-        for pair in channel_mapping.split(","):
-            pair = pair.strip()
-            if "=" in pair:
-                k, v = pair.split("=", 1)
-                ch_map[k.strip()] = v.strip()
-
-    # Parse options "baudrate=115200,parity=none" -> {"baudrate": "115200", ...}
-    opts = None
-    if options:
-        opts = {}
-        for pair in options.split(","):
-            pair = pair.strip()
-            if "=" in pair:
-                k, v = pair.split("=", 1)
-                opts[k.strip()] = v.strip()
-
-    try:
-        raw = await sigrok_cli.decode_protocol(
-            input_file=info.file_path,
-            decoder=protocol,
-            decoder_options=opts,
-            channel_mapping=ch_map,
-            annotation_filter=annotation_filter,
+        await sigrok_cli.run_capture(
+            output_file=file_path,
+            driver=driver,
+            channels=channels,
+            sample_rate=sample_rate,
+            num_samples=num_samples,
+            duration_ms=duration_ms,
+            triggers=triggers,
+            wait_trigger=wait_trigger,
+            trigger_timeout=trigger_timeout,
         )
-    except sigrok_cli.DecoderError as e:
-        return f"Decoder error: {e}"
+    except sigrok_cli.SigrokError as e:
+        return f"Capture failed: {e}"
 
-    return format_decoded_protocol(raw, max_lines=max_results)
+    size = os.path.getsize(file_path) if os.path.exists(file_path) else 0
+
+    # 2. Decode
+    decode_result = await _run_decode(
+        store, capture_id, protocol, channel_mapping, options,
+        None, detail,
+    )
+
+    # 3. Format response
+    parts = [
+        f"Capture {capture_id} ({size} bytes, {sample_rate} sample rate)",
+    ]
+    if description:
+        parts[0] += f" — {description}"
+    parts.append("")
+    parts.append(decode_result)
+    parts.append("")
+    parts.append(
+        f"Use decode_protocol with capture_id=\"{capture_id}\" "
+        f"for re-analysis or detail=\"raw\" for full annotations."
+    )
+    return "\n".join(parts)
 
 
 @mcp.tool()

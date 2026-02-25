@@ -95,3 +95,29 @@ def test_custom_base_dir():
         # cleanup should not remove a user-provided directory
         store.cleanup()
         assert os.path.exists(custom_dir)
+
+
+def test_cache_decode_and_retrieve():
+    store = CaptureStore()
+    try:
+        cap_id, _ = store.new_capture()
+        raw_output = "i2c-1: Start\ni2c-1: Data write: FF\n"
+        cache_path = store.cache_decode(cap_id, "i2c", raw_output)
+
+        assert os.path.exists(cache_path)
+        assert cache_path.endswith("cap_001_i2c_raw.txt")
+
+        cached = store.get_cached_decode(cap_id, "i2c")
+        assert cached == raw_output
+    finally:
+        store.cleanup()
+
+
+def test_cache_decode_miss():
+    store = CaptureStore()
+    try:
+        cap_id, _ = store.new_capture()
+        assert store.get_cached_decode(cap_id, "spi") is None
+        assert store.get_cached_decode("cap_999", "i2c") is None
+    finally:
+        store.cleanup()
