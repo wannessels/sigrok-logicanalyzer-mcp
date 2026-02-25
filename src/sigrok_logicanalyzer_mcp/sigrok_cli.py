@@ -45,7 +45,7 @@ _DEFAULT_TIMEOUT = 30  # seconds
 # Annotation filters that strip individual bit annotations for known protocols.
 # Used when detail="summary" to get only high-level decode output from sigrok-cli.
 _SUMMARY_ANNOTATION_FILTERS: dict[str, str] = {
-    # Tested with example .sr files
+    # --- Tested with example .sr files ---
     "i2c": "i2c=start:repeat-start:stop:ack:nack:address-read:address-write:data-read:data-write",
     "spi": "spi=mosi-data:miso-data:mosi-transfer:miso-transfer",
     "uart": "uart=rx-data:tx-data",
@@ -59,7 +59,112 @@ _SUMMARY_ANNOTATION_FILTERS: dict[str, str] = {
     "spiflash": "spiflash",
     "sdcard_sd": "sdcard_sd=cmd0:cmd2:cmd3:cmd6:cmd7:cmd8:cmd9:cmd10:cmd11:cmd12:cmd13:cmd16:cmd17:cmd18:cmd23:cmd24:cmd25:cmd41:cmd55:decoded-fields",
     "z80": "z80=memrd:memwr:iord:iowr:instr",  # may need channel mapping debugging
-    "arm_itm": "arm_itm",  # untested — stacks on UART
+    "arm_itm": "arm_itm",  # untested -- stacks on UART
+    # --- Untested: communication buses ---
+    "ac97": "ac97",  # untested
+    "flexray": "flexray",  # untested
+    "gpib": "gpib",  # untested
+    "i2s": "i2s",  # untested
+    "ieee488": "ieee488",  # untested
+    "lin": "lin",  # untested
+    "modbus": "modbus",  # untested
+    "dali": "dali",  # untested
+    "dmx512": "dmx512",  # untested
+    "midi": "midi",  # untested
+    "spdif": "spdif",  # untested
+    "dsi": "dsi",  # untested
+    "cec": "cec",  # untested
+    "lpc": "lpc",  # untested
+    "microwire": "microwire",  # untested
+    "ps2": "ps2",  # untested
+    "ssi32": "ssi32",  # untested
+    "swim": "swim",  # untested
+    "wiegand": "wiegand",  # untested
+    "parallel": "parallel",  # untested
+    "tdm_audio": "tdm_audio",  # untested
+    "iec": "iec",  # untested
+    # --- Untested: memory/storage ---
+    "eeprom24xx": "eeprom24xx",  # untested
+    "eeprom93xx": "eeprom93xx",  # untested
+    "x2444m": "x2444m",  # untested
+    "sda2506": "sda2506",  # untested
+    "sdcard_spi": "sdcard_spi",  # untested
+    # --- Untested: sensors ---
+    "lm75": "lm75",  # untested
+    "mlx90614": "mlx90614",  # untested
+    "mxc6225xu": "mxc6225xu",  # untested
+    "ds1307": "ds1307",  # untested
+    "ds2408": "ds2408",  # untested
+    "ds243x": "ds243x",  # untested
+    "ds28ea00": "ds28ea00",  # untested
+    "rtc8564": "rtc8564",  # untested
+    "atsha204a": "atsha204a",  # untested
+    "pca9571": "pca9571",  # untested
+    "tca6408a": "tca6408a",  # untested
+    # --- Untested: display/LED ---
+    "max7219": "max7219",  # untested
+    "seven_segment": "seven_segment",  # untested
+    "rgb_led_spi": "rgb_led_spi",  # untested
+    "rgb_led_ws281x": "rgb_led_ws281x",  # untested
+    "st7735": "st7735",  # untested
+    "tlc5620": "tlc5620",  # untested
+    # --- Untested: RF/wireless ---
+    "cc1101": "cc1101",  # untested
+    "nrf24l01": "nrf24l01",  # untested
+    "rfm12": "rfm12",  # untested
+    "em4100": "em4100",  # untested
+    "em4305": "em4305",  # untested
+    "t55xx": "t55xx",  # untested
+    "ir_nec": "ir_nec",  # untested
+    "ir_rc5": "ir_rc5",  # untested
+    "ir_rc6": "ir_rc6",  # untested
+    "ook": "ook",  # untested
+    "ook_oregon": "ook_oregon",  # untested
+    "ook_vis": "ook_vis",  # untested
+    "qi": "qi",  # untested
+    "mrf24j40": "mrf24j40",  # untested
+    # --- Untested: debug ---
+    "swd": "swd",  # untested
+    "jtag": "jtag",  # untested
+    "jtag_ejtag": "jtag_ejtag",  # untested
+    "jtag_stm32": "jtag_stm32",  # untested
+    "arm_etmv3": "arm_etmv3",  # untested
+    "arm_tpiu": "arm_tpiu",  # untested
+    "avr_pdi": "avr_pdi",  # untested
+    "mcs48": "mcs48",  # untested
+    # --- Untested: USB ---
+    "usb_signalling": "usb_signalling",  # untested
+    "usb_power_delivery": "usb_power_delivery",  # untested
+    "usb_request": "usb_request",  # untested
+    # --- Untested: utility ---
+    "counter": "counter",  # untested
+    "timing": "timing",  # untested
+    "jitter": "jitter",  # untested
+    "guess_bitrate": "guess_bitrate",  # untested
+    "pwm": "pwm",  # untested
+    "miller": "miller",  # untested
+    "morse": "morse",  # untested
+    "graycode": "graycode",  # untested
+    "rc_encode": "rc_encode",  # untested
+    "stepper_motor": "stepper_motor",  # untested
+    # --- Untested: misc ---
+    "cfp": "cfp",  # untested
+    "xfp": "xfp",  # untested
+    "edid": "edid",  # untested
+    "hdcp": "hdcp",  # untested
+    "maple_bus": "maple_bus",  # untested
+    "nes_gamepad": "nes_gamepad",  # untested
+    "nunchuk": "nunchuk",  # untested
+    "pan1321": "pan1321",  # untested
+    "amulet_ascii": "amulet_ascii",  # untested
+    "ade77xx": "ade77xx",  # untested
+    "adf435x": "adf435x",  # untested
+    "adns5020": "adns5020",  # untested
+    "aud": "aud",  # untested
+    "enc28j60": "enc28j60",  # untested
+    "onewire_link": "onewire_link",  # untested
+    "i2cdemux": "i2cdemux",  # untested
+    "i2cfilter": "i2cfilter",  # untested
 }
 
 
