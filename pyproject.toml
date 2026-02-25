@@ -1,11 +1,32 @@
 [project]
 name = "sigrok-logicanalyzer-mcp"
 version = "0.1.0"
-description = "MCP server for sigrok logic analyzers (ZeroPlus LAP-C 16128 and others)"
+description = "MCP server for sigrok logic analyzers — capture, decode, and analyze I2C/SPI/UART/CAN and 100+ protocols"
 requires-python = ">=3.10"
+license = "GPL-3.0-or-later"
+authors = [
+    { name = "Wannes Sels" },
+]
+keywords = ["sigrok", "logic-analyzer", "mcp", "protocol-decoder", "embedded"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Embedded Systems",
+]
 dependencies = [
     "mcp>=1.2.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/wannessels/sigrok-mcp"
+Repository = "https://github.com/wannessels/sigrok-mcp"
+Issues = "https://github.com/wannessels/sigrok-mcp/issues"
 
 [project.scripts]
 sigrok-logicanalyzer-mcp = "sigrok_logicanalyzer_mcp.server:main"
