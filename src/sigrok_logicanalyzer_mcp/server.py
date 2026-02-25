@@ -31,6 +31,7 @@ from sigrok_logicanalyzer_mcp.formatters import (
 # Lifespan — initializes and tears down the CaptureStore
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class AppContext:
     store: CaptureStore
@@ -71,6 +72,7 @@ def _get_store(ctx: Context) -> CaptureStore:
 # ---------------------------------------------------------------------------
 # Tools
 # ---------------------------------------------------------------------------
+
 
 @mcp.tool()
 async def scan_devices(
@@ -167,7 +169,7 @@ async def capture(
     parts.append("")
     parts.append(
         "Use decode_protocol, get_raw_samples, or analyze_capture "
-        f"with capture_id=\"{capture_id}\" to examine the data."
+        f'with capture_id="{capture_id}" to examine the data.'
     )
     return "\n".join(parts)
 
@@ -265,8 +267,13 @@ async def decode_protocol(
     """
     store = _get_store(ctx)
     return await _run_decode(
-        store, capture_id, protocol, channel_mapping, options,
-        annotation_filter, detail,
+        store,
+        capture_id,
+        protocol,
+        channel_mapping,
+        options,
+        annotation_filter,
+        detail,
     )
 
 
@@ -335,8 +342,13 @@ async def capture_and_decode(
 
     # 2. Decode
     decode_result = await _run_decode(
-        store, capture_id, protocol, channel_mapping, options,
-        None, detail,
+        store,
+        capture_id,
+        protocol,
+        channel_mapping,
+        options,
+        None,
+        detail,
     )
 
     # 3. Format response
@@ -349,8 +361,8 @@ async def capture_and_decode(
     parts.append(decode_result)
     parts.append("")
     parts.append(
-        f"Use decode_protocol with capture_id=\"{capture_id}\" "
-        f"for re-analysis or detail=\"raw\" for full annotations."
+        f'Use decode_protocol with capture_id="{capture_id}" '
+        f'for re-analysis or detail="raw" for full annotations.'
     )
     return "\n".join(parts)
 
@@ -374,7 +386,8 @@ async def list_protocol_decoders(
     if filter:
         needle = filter.lower()
         decoders = [
-            d for d in decoders
+            d
+            for d in decoders
             if needle in d["id"].lower() or needle in d["description"].lower()
         ]
 
@@ -477,15 +490,14 @@ async def list_captures(ctx: Context) -> str:
     lines = [f"Captures ({len(captures)}):"]
     for cap in captures:
         desc = f" — {cap['description']}" if cap.get("description") else ""
-        lines.append(
-            f"  {cap['id']}  {cap['size_bytes']:>8} bytes{desc}"
-        )
+        lines.append(f"  {cap['id']}  {cap['size_bytes']:>8} bytes{desc}")
     return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
+
 
 def main():
     mcp.run(transport="stdio")

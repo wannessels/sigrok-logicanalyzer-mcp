@@ -42,4 +42,5 @@ packages = ["src/sigrok_logicanalyzer_mcp"]
 dev = [
     "pytest>=7.0",
     "pytest-asyncio>=0.21",
+    "ruff>=0.4",
 ]

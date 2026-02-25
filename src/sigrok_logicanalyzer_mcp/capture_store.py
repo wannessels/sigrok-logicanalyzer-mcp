@@ -6,7 +6,7 @@ import os
 import shutil
 import tempfile
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 class CaptureNotFoundError(Exception):
@@ -73,10 +73,8 @@ class CaptureStore:
 
     def cache_decode(self, capture_id: str, decoder: str, raw_output: str) -> str:
         """Cache raw decode output alongside the capture. Returns the cache path."""
-        info = self.get(capture_id)
-        cache_path = os.path.join(
-            self._base_dir, f"{capture_id}_{decoder}_raw.txt"
-        )
+        self.get(capture_id)  # raises CaptureNotFoundError if missing
+        cache_path = os.path.join(self._base_dir, f"{capture_id}_{decoder}_raw.txt")
         with open(cache_path, "w", encoding="utf-8") as f:
             f.write(raw_output)
         return cache_path
@@ -85,9 +83,7 @@ class CaptureStore:
         """Return cached raw decode output, or None if not cached."""
         if capture_id not in self._captures:
             return None
-        cache_path = os.path.join(
-            self._base_dir, f"{capture_id}_{decoder}_raw.txt"
-        )
+        cache_path = os.path.join(self._base_dir, f"{capture_id}_{decoder}_raw.txt")
         if os.path.exists(cache_path):
             with open(cache_path, "r", encoding="utf-8") as f:
                 return f.read()
@@ -100,13 +96,15 @@ class CaptureStore:
             size = 0
             if os.path.exists(info.file_path):
                 size = os.path.getsize(info.file_path)
-            result.append({
-                "id": info.capture_id,
-                "file_path": info.file_path,
-                "size_bytes": size,
-                "created_at": info.created_at,
-                "description": info.description,
-            })
+            result.append(
+                {
+                    "id": info.capture_id,
+                    "file_path": info.file_path,
+                    "size_bytes": size,
+                    "created_at": info.created_at,
+                    "description": info.description,
+                }
+            )
         return result
 
     def cleanup(self) -> None:

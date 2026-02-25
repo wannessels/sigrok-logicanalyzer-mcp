@@ -3,8 +3,6 @@
 import os
 import subprocess
 
-import pytest
-
 from tests.conftest import skip_no_sigrok, FIXTURES_DIR
 from sigrok_logicanalyzer_mcp.formatters import (
     format_i2c_transactions,
@@ -25,8 +23,7 @@ from sigrok_logicanalyzer_mcp.formatters import (
 
 def _decode(fixture, decoder_spec, annotation_filter=None):
     """Run sigrok-cli on a fixture file and return stdout."""
-    args = ["sigrok-cli", "-i", os.path.join(FIXTURES_DIR, fixture),
-            "-P", decoder_spec]
+    args = ["sigrok-cli", "-i", os.path.join(FIXTURES_DIR, fixture), "-P", decoder_spec]
     if annotation_filter:
         args += ["-A", annotation_filter]
     result = subprocess.run(args, capture_output=True, text=True)
@@ -36,7 +33,6 @@ def _decode(fixture, decoder_spec, annotation_filter=None):
 
 @skip_no_sigrok
 class TestProtocolDecode:
-
     def test_i2c(self):
         raw = _decode(
             "hantek_6022be_powerup.sr",

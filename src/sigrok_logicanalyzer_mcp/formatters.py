@@ -56,8 +56,7 @@ def format_raw_samples(
     window = lines[start:end]
 
     header = (
-        f"Samples {start}-{end - 1} of {total} total "
-        f"(showing {end - start} samples):\n"
+        f"Samples {start}-{end - 1} of {total} total (showing {end - start} samples):\n"
     )
 
     return header + "\n".join(window)
@@ -129,9 +128,7 @@ def summarize_capture_data(raw_output: str) -> str:
         f"Capture summary: {total_samples} samples, {len(channel_order)} channels"
     )
     summary_lines.append("")
-    summary_lines.append(
-        f"{'Channel':<10} {'High %':>8} {'Edges':>8}   {'Activity'}"
-    )
+    summary_lines.append(f"{'Channel':<10} {'High %':>8} {'Edges':>8}   {'Activity'}")
     summary_lines.append("-" * 45)
 
     for ch_name, total, high_count, edge_count in header_parts:
@@ -154,6 +151,7 @@ def summarize_capture_data(raw_output: str) -> str:
 # ---------------------------------------------------------------------------
 # Transaction grouping formatters
 # ---------------------------------------------------------------------------
+
 
 def _parse_annotations(raw_output: str) -> list[str]:
     """Strip the decoder prefix (e.g. 'i2c-1: ') and return annotation values."""
@@ -238,9 +236,7 @@ def format_i2c_transactions(raw_output: str, max_transactions: int = 500) -> str
     _flush_transaction()
 
     total = len(transactions)
-    addr_summary = ", ".join(
-        f"0x{addr}" for addr, _ in addresses.most_common()
-    )
+    addr_summary = ", ".join(f"0x{addr}" for addr, _ in addresses.most_common())
 
     lines = [f"I2C: {total} transactions, devices: {addr_summary}", ""]
 
@@ -287,7 +283,7 @@ def format_spi_transactions(raw_output: str, max_transactions: int = 500) -> str
         # Transfer annotations mark CS boundaries
         if ann.startswith("MOSI transfer") or ann.startswith("MISO transfer"):
             _flush()
-        elif ann.startswith("MOSI data") or re.match(r'^[0-9A-Fa-f]{2}$', ann):
+        elif ann.startswith("MOSI data") or re.match(r"^[0-9A-Fa-f]{2}$", ann):
             # mosi-data annotations vary: sometimes "MOSI data: XX" or just "XX"
             val = ann.split(": ", 1)[1] if ": " in ann else ann
             mosi_bytes.append(val.upper())
@@ -364,8 +360,7 @@ def format_uart_transactions(raw_output: str, max_bytes: int = 2000) -> str:
         ascii_str = ""
         try:
             ascii_str = "".join(
-                chr(int(b, 16)) if 0x20 <= int(b, 16) < 0x7F else "."
-                for b in data
+                chr(int(b, 16)) if 0x20 <= int(b, 16) < 0x7F else "." for b in data
             )
         except ValueError:
             pass
@@ -434,11 +429,11 @@ def format_can_transactions(raw_output: str, max_transactions: int = 500) -> str
             _flush()
         elif ann.startswith("Identifier:") and "extension" not in ann:
             # "Identifier: 255 (0xff)"
-            m = re.search(r'\(0x([0-9a-fA-F]+)\)', ann)
+            m = re.search(r"\(0x([0-9a-fA-F]+)\)", ann)
             if m:
                 current_id = m.group(1)
         elif ann.startswith("Full Identifier:"):
-            m = re.search(r'\(0x([0-9a-fA-F]+)\)', ann)
+            m = re.search(r"\(0x([0-9a-fA-F]+)\)", ann)
             if m:
                 current_full_id = m.group(1)
         elif ann.startswith("Data length code:"):
@@ -580,7 +575,12 @@ def format_usb_transactions(raw_output: str, max_transactions: int = 500) -> str
 
     for ann in annotations:
         # Skip low-level fields
-        if ann.startswith("SYNC:") or ann.startswith("CRC") or ann.startswith("PID:") or ann.startswith("Frame:"):
+        if (
+            ann.startswith("SYNC:")
+            or ann.startswith("CRC")
+            or ann.startswith("PID:")
+            or ann.startswith("Frame:")
+        ):
             continue
         # SOF summary line: "SOF 1128"
         if ann.startswith("SOF "):
@@ -768,7 +768,7 @@ def format_sdcard_transactions(raw_output: str, max_transactions: int = 500) -> 
     # Keep only meaningful annotations (commands, replies, card status)
     operations: list[str] = []
     for ann in annotations:
-        if re.match(r'^[01]$', ann):
+        if re.match(r"^[01]$", ann):
             continue  # skip raw bits
         operations.append(ann)
 
@@ -834,7 +834,9 @@ _TRANSACTION_FORMATTERS = {
 }
 
 
-def format_decoded_summary(raw_output: str, protocol: str, max_transactions: int = 500) -> str:
+def format_decoded_summary(
+    raw_output: str, protocol: str, max_transactions: int = 500
+) -> str:
     """Format decoded output as a compact transaction summary.
 
     Uses protocol-specific formatter if available, otherwise falls back

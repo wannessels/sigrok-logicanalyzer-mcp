@@ -7,13 +7,13 @@ builds a command, runs it via asyncio subprocess, and parses the output.
 from __future__ import annotations
 
 import asyncio
-import re
 import shutil
 
 
 # ---------------------------------------------------------------------------
 # Exceptions
 # ---------------------------------------------------------------------------
+
 
 class SigrokNotFoundError(Exception):
     """sigrok-cli is not installed or not on PATH."""
@@ -208,8 +208,7 @@ async def _run(
         proc.kill()
         await proc.communicate()
         raise CaptureError(
-            f"sigrok-cli timed out after {timeout}s. "
-            f"Command: {' '.join(cmd)}"
+            f"sigrok-cli timed out after {timeout}s. Command: {' '.join(cmd)}"
         )
 
     stdout = stdout_bytes.decode("utf-8", errors="replace")
@@ -229,6 +228,7 @@ async def _run(
 # Public API
 # ---------------------------------------------------------------------------
 
+
 async def scan_devices(driver: str = "zeroplus-logic-cube") -> list[dict]:
     """Scan for connected devices using the specified driver.
 
@@ -244,10 +244,12 @@ async def scan_devices(driver: str = "zeroplus-logic-cube") -> list[dict]:
         line = line.strip()
         if not line or line.startswith("The following"):
             continue
-        devices.append({
-            "driver": driver,
-            "description": line,
-        })
+        devices.append(
+            {
+                "driver": driver,
+                "description": line,
+            }
+        )
 
     if not devices:
         raise DeviceNotFoundError(
