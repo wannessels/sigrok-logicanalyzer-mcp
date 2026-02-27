@@ -26,6 +26,25 @@ from sigrok_logicanalyzer_mcp.formatters import (
     summarize_capture_data,
 )
 
+# ---------------------------------------------------------------------------
+# Default driver — resolved from SIGROK_DEFAULT_DRIVER env var
+# ---------------------------------------------------------------------------
+
+DEFAULT_DRIVER = os.environ.get("SIGROK_DEFAULT_DRIVER", "")
+
+
+def _default_driver(driver: str) -> str:
+    """Resolve the driver, falling back to SIGROK_DEFAULT_DRIVER env var."""
+    if driver:
+        return driver
+    if DEFAULT_DRIVER:
+        return DEFAULT_DRIVER
+    raise sigrok_cli.SigrokError(
+        "No driver specified. Set the SIGROK_DEFAULT_DRIVER environment "
+        "variable or pass driver= explicitly. Common drivers: fx2lafw, "
+        "dreamsourcelab-dslogic, saleae-logic-pro, zeroplus-logic-cube."
+    )
+
 
 # ---------------------------------------------------------------------------
 # Lifespan — initializes and tears down the CaptureStore
@@ -76,20 +95,23 @@ def _get_store(ctx: Context) -> CaptureStore:
 
 @mcp.tool()
 async def scan_devices(
-    driver: str = "zeroplus-logic-cube",
+    driver: str = "",
 ) -> str:
     """Scan for connected sigrok-compatible logic analyzers.
 
     Args:
-        driver: sigrok driver name. Default is "zeroplus-logic-cube" for
-                ZeroPlus LAP-C devices. Other common drivers: "fx2lafw",
-                "saleae-logic-pro", "dreamsourcelab-dslogic".
+        driver: sigrok driver name (e.g. "fx2lafw", "dreamsourcelab-dslogic",
+                "saleae-logic-pro", "zeroplus-logic-cube"). Falls back to
+                SIGROK_DEFAULT_DRIVER env var if not provided.
     """
     try:
+        driver = _default_driver(driver)
         devices = await sigrok_cli.scan_devices(driver=driver)
     except sigrok_cli.DeviceNotFoundError as e:
         return str(e)
     except sigrok_cli.SigrokNotFoundError as e:
+        return str(e)
+    except sigrok_cli.SigrokError as e:
         return str(e)
 
     lines = [f"Found {len(devices)} device(s):"]
@@ -108,7 +130,7 @@ async def capture(
     triggers: str | None = None,
     wait_trigger: bool = False,
     trigger_timeout: float = 30.0,
-    driver: str = "zeroplus-logic-cube",
+    driver: str = "",
     description: str = "",
 ) -> str:
     """Capture digital signals from the logic analyzer.
@@ -120,20 +142,20 @@ async def capture(
         sample_rate: Sample rate — e.g. "1m" (1 MHz), "200k", "10m", "100m".
         num_samples: Number of samples to capture. Use this OR duration_ms.
         duration_ms: Capture duration in milliseconds. Use this OR num_samples.
-        channels: Channel selection — e.g. "A0-A7" or "A0,A1,B0,B1". Channel
-                  names depend on the device (ZeroPlus uses A0-A7, B0-B7;
-                  fx2lafw uses D0-D7). Default: all.
-        triggers: Trigger conditions — e.g. "A0=0" (ch A0 low), "A0=1" (ch A0 high).
-                  Supported types depend on device (ZeroPlus: 0=low, 1=high only).
+        channels: Channel selection. Names depend on the driver — run
+                  scan_devices to discover them. Default: all channels.
+        triggers: Trigger conditions — e.g. "0=r" (rising), "0=1" (high).
+                  Supported trigger types depend on device.
         wait_trigger: If true, only output data after the trigger fires.
         trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
-        driver: sigrok driver name.
+        driver: sigrok driver name. Falls back to SIGROK_DEFAULT_DRIVER env var.
         description: Optional label for this capture.
     """
     store = _get_store(ctx)
     capture_id, file_path = store.new_capture(description=description)
 
     try:
+        driver = _default_driver(driver)
         await sigrok_cli.run_capture(
             output_file=file_path,
             driver=driver,
@@ -255,9 +277,9 @@ async def decode_protocol(
         protocol: Decoder name — common ones: "i2c", "spi", "uart", "1wire",
                   "jtag", "can", "lin", "usb_signalling", "sdcard_spi".
         channel_mapping: Map protocol signals to LA channels — e.g.
-                         "sda=A0,scl=A1" for I2C, "mosi=A0,miso=A1,sck=A2,cs=A3"
-                         for SPI, "rx=A0" for UART. Use the device's channel
-                         names (run scan_devices to see available channels).
+                         "sda=CH0,scl=CH1" for I2C, "mosi=CH0,miso=CH1,sck=CH2,cs=CH3"
+                         for SPI, "rx=CH0" for UART. Channel names depend on the
+                         driver — run scan_devices to discover them.
         options: Decoder options — e.g. "baudrate=115200" for UART,
                  "cpol=0,cpha=0,bitorder=msb-first" for SPI.
         annotation_filter: Show only specific annotations — e.g. "uart=tx-data"
@@ -289,7 +311,7 @@ async def capture_and_decode(
     triggers: str | None = None,
     wait_trigger: bool = False,
     trigger_timeout: float = 30.0,
-    driver: str = "zeroplus-logic-cube",
+    driver: str = "",
     options: str | None = None,
     detail: str = "summary",
     description: str = "",
@@ -303,17 +325,18 @@ async def capture_and_decode(
     Args:
         protocol: Decoder name — "i2c", "spi", "uart", etc.
         channel_mapping: Map protocol signals to LA channels — e.g.
-                         "sda=A0,scl=A1" for I2C, "mosi=A0,miso=A1,sck=A2,cs=A3"
-                         for SPI, "rx=A0" for UART.
+                         "sda=CH0,scl=CH1" for I2C, "mosi=CH0,miso=CH1,sck=CH2,cs=CH3"
+                         for SPI, "rx=CH0" for UART. Channel names depend on the
+                         driver — run scan_devices to discover them.
         sample_rate: Sample rate — e.g. "1m" (1 MHz), "200k", "10m".
         num_samples: Number of samples to capture. Use this OR duration_ms.
         duration_ms: Capture duration in milliseconds. Use this OR num_samples.
-        channels: Channel selection — e.g. "A0,A1". Default: all.
-        triggers: Trigger conditions — e.g. "A0=0" (ch A0 low).
-                  Supported types depend on device (ZeroPlus: 0=low, 1=high).
+        channels: Channel selection. Names depend on the driver. Default: all.
+        triggers: Trigger conditions — e.g. "0=r" (rising), "0=1" (high).
+                  Supported trigger types depend on device.
         wait_trigger: If true, only output data after the trigger fires.
         trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
-        driver: sigrok driver name.
+        driver: sigrok driver name. Falls back to SIGROK_DEFAULT_DRIVER env var.
         options: Decoder options — e.g. "baudrate=115200" for UART.
         detail: "summary" (default) — compact transaction view, or
                 "raw" — full sigrok-cli annotations.
@@ -324,6 +347,7 @@ async def capture_and_decode(
 
     # 1. Capture
     try:
+        driver = _default_driver(driver)
         await sigrok_cli.run_capture(
             output_file=file_path,
             driver=driver,

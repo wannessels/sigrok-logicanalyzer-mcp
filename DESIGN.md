@@ -4,7 +4,7 @@
 
 An MCP (Model Context Protocol) server that gives Claude Code (or any MCP client) direct access to sigrok-compatible logic analyzers. Capture digital signals, decode protocols (I2C, SPI, UART, CAN, and 100+ others), and analyze timing -- all through tool calls.
 
-Built for the ZeroPlus LAP-C 16128 but works with any sigrok-supported hardware.
+Works with any sigrok-supported logic analyzer hardware. Set the `SIGROK_DEFAULT_DRIVER` environment variable to your device's sigrok driver name, or pass `driver=` explicitly to each tool call.
 
 This is the initial CLI-based branch. All sigrok interaction happens via `sigrok-cli` subprocess calls. See the `python-bindings` branch for the native Python bindings version with in-process decoding.
 
@@ -134,7 +134,7 @@ For USB logic analyzers, add udev rules so non-root users can access the device:
 
 ```bash
 # /etc/udev/rules.d/61-sigrok.rules
-# ZeroPlus Logic Cube LAP-C
+# Example for ZeroPlus Logic Cube LAP-C (adjust idVendor/idProduct for your device)
 ATTRS{idVendor}=="0c12", ATTRS{idProduct}=="700e", MODE="0664", GROUP="plugdev"
 ```
 

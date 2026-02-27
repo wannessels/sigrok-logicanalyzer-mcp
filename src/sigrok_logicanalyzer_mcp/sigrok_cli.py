@@ -229,7 +229,7 @@ async def _run(
 # ---------------------------------------------------------------------------
 
 
-async def scan_devices(driver: str = "zeroplus-logic-cube") -> list[dict]:
+async def scan_devices(driver: str = "") -> list[dict]:
     """Scan for connected devices using the specified driver.
 
     Returns a list of dicts with keys: driver, description, connection.
@@ -237,9 +237,6 @@ async def scan_devices(driver: str = "zeroplus-logic-cube") -> list[dict]:
     output = await _run(["--driver", driver, "--scan"])
 
     devices = []
-    # sigrok-cli --scan output format:
-    #   The following devices were found:
-    #   zeroplus-logic-cube - ZeroPlus Logic Cube LAP-C(16128) with 16 channels
     for line in output.strip().splitlines():
         line = line.strip()
         if not line or line.startswith("The following"):
@@ -260,14 +257,14 @@ async def scan_devices(driver: str = "zeroplus-logic-cube") -> list[dict]:
     return devices
 
 
-async def get_device_info(driver: str = "zeroplus-logic-cube") -> str:
+async def get_device_info(driver: str = "") -> str:
     """Get detailed device information (sample rates, channels, etc.)."""
     return await _run(["--driver", driver, "--show"])
 
 
 async def run_capture(
     output_file: str,
-    driver: str = "zeroplus-logic-cube",
+    driver: str = "",
     channels: str | None = None,
     sample_rate: str = "1m",
     num_samples: int | None = None,
@@ -281,11 +278,11 @@ async def run_capture(
     Args:
         output_file: Path to save the .sr capture file.
         driver: sigrok driver name.
-        channels: Channel spec using device names, e.g. "A0-A7" or "A0,A1,B0,B1".
+        channels: Channel spec using device channel names.
         sample_rate: Sample rate, e.g. "1m" for 1 MHz, "200k" for 200 kHz.
         num_samples: Number of samples to capture (mutually exclusive with duration_ms).
         duration_ms: Capture duration in milliseconds.
-        triggers: Trigger spec, e.g. "A0=r,A1=0" (channel A0 rising, A1 low).
+        triggers: Trigger spec, e.g. "0=r,1=0" (channel 0 rising, channel 1 low).
         wait_trigger: If True, suppress pre-trigger data.
         trigger_timeout: Timeout in seconds when waiting for a trigger (default 30).
 
